@@ -62,5 +62,30 @@ object SubstationData {
         )
     )
 
-    val allOru = listOf(oru500)
+    val oru35 = Oru(
+        voltage = "35",
+        name = "ОРУ-35",
+        equipments = listOf(
+            Equipment(
+                id = "2ТСН",
+                name = "Трансформатор 2ТСН",
+                type = EquipmentType.POWER_TRANSFORMER,
+                parameters = listOf(
+                    InspectionParameter("Уровень масла по РУМ", "°C", "-40 до +60"),
+                    InspectionParameter("Температура", "°C", "<85")
+                )
+            ),
+            Equipment(
+                id = "3ТСН",
+                name = "Трансформатор 3ТСН",
+                type = EquipmentType.POWER_TRANSFORMER,
+                parameters = listOf(
+                    InspectionParameter("Уровень масла по РУМ", "°C", "-40 до +60"),
+                    InspectionParameter("Температура", "°C", "<85")
+                )
+            )
+        )
+    )
+
+    val allOru = listOf(oru500, oru35)
 }
