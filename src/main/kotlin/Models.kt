@@ -44,21 +44,476 @@ enum class AppScreen {
 }
 
 object SubstationData {
-    val oru500 = Oru(
-        voltage = "500",
-        name = "ОРУ-500",
+    val atg_reactor = Oru(
+        voltage = "500/200/35",
+        name = "АТГ, Р-500 2С",
         equipments = listOf(
             // АТГ
             Equipment(
-                id = "2АТГ",
-                name = "2АТГ",
+                id = "2АТГ ф.С",
+                name = "2АТГ ф.С",
                 type = EquipmentType.POWER_TRANSFORMER,
                 parameters = listOf(
-                    InspectionParameter("Уровень масла РУМ", "°C", "30±2"),
-                    InspectionParameter("Температура ТС", "°C", "<85")
+                    InspectionParameter("Уровень масла Бак", "°C", "<70"),
+                    InspectionParameter("Уровень масла РПН", "°C", "<70"),
+                    InspectionParameter("Температура ТС1", "°C", "<70"),
+                    InspectionParameter("Температура ТС2", "°C", "<70"),
+                    InspectionParameter("Давление во вводе 500кВ", "кгс/см²", ""),
+                    InspectionParameter("Давление во вводе 220кВ", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 1гр", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 2гр", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 3гр", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 4гр", "кгс/см²", ""),
+                )
+            )
+            ,Equipment(
+                id = "2АТГ ф.В",
+                name = "2АТГ ф.В",
+                type = EquipmentType.POWER_TRANSFORMER,
+                parameters = listOf(
+                    InspectionParameter("Уровень масла Бак", "°C", "<70"),
+                    InspectionParameter("Уровень масла РПН", "°C", "<70"),
+                    InspectionParameter("Температура ТС1", "°C", "<70"),
+                    InspectionParameter("Температура ТС2", "°C", "<70"),
+                    InspectionParameter("Давление во вводе 500кВ", "кгс/см²", ""),
+                    InspectionParameter("Давление во вводе 220кВ", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 1гр", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 2гр", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 3гр", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 4гр", "кгс/см²", ""),
+                )
+            ),
+            Equipment(
+                id = "2АТГ ф.А",
+                name = "2АТГ ф.А",
+                type = EquipmentType.POWER_TRANSFORMER,
+                parameters = listOf(
+                    InspectionParameter("Уровень масла Бак", "°C", "<70"),
+                    InspectionParameter("Уровень масла РПН", "°C", "<70"),
+                    InspectionParameter("Температура ТС1", "°C", "<70"),
+                    InspectionParameter("Температура ТС2", "°C", "<70"),
+                    InspectionParameter("Давление во вводе 500кВ", "кгс/см²", ""),
+                    InspectionParameter("Давление во вводе 220кВ", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 1гр", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 2гр", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 3гр", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 4гр", "кгс/см²", ""),
+                )
+            ),
+            Equipment(
+                id = "АТГ-резерв",
+                name = "АТГ-резерв",
+                type = EquipmentType.POWER_TRANSFORMER,
+                parameters = listOf(
+                    InspectionParameter("Уровень масла Бак", "°C", "<70"),
+                    InspectionParameter("Уровень масла РПН", "°C", "<70"),
+                    InspectionParameter("Температура ТС1", "°C", "<70"),
+                    InspectionParameter("Температура ТС2", "°C", "<70"),
+                    InspectionParameter("Давление во вводе 500кВ", "кгс/см²", ""),
+                    InspectionParameter("Давление во вводе 220кВ", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 1гр", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 2гр", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 3гр", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 4гр", "кгс/см²", ""),
+                )
+            ),
+            Equipment(
+                id = "3АТГ ф.С",
+                name = "3АТГ ф.С",
+                type = EquipmentType.POWER_TRANSFORMER,
+                parameters = listOf(
+                    InspectionParameter("Уровень масла Бак", "°C", "<70"),
+                    InspectionParameter("Уровень масла РПН", "°C", "<70"),
+                    InspectionParameter("Температура ТС1", "°C", "<70"),
+                    InspectionParameter("Температура ТС2", "°C", "<70"),
+                    InspectionParameter("Давление во вводе 500кВ", "кгс/см²", ""),
+                    InspectionParameter("Давление во вводе 220кВ", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 1гр", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 2гр", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 3гр", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 4гр", "кгс/см²", ""),
+                )
+            )
+            ,Equipment(
+                id = "3АТГ ф.В",
+                name = "3АТГ ф.В",
+                type = EquipmentType.POWER_TRANSFORMER,
+                parameters = listOf(
+                    InspectionParameter("Уровень масла Бак", "°C", "<70"),
+                    InspectionParameter("Уровень масла РПН", "°C", "<70"),
+                    InspectionParameter("Температура ТС1", "°C", "<70"),
+                    InspectionParameter("Температура ТС2", "°C", "<70"),
+                    InspectionParameter("Давление во вводе 500кВ", "кгс/см²", ""),
+                    InspectionParameter("Давление во вводе 220кВ", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 1гр", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 2гр", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 3гр", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 4гр", "кгс/см²", ""),
+                )
+            ),
+            Equipment(
+                id = "3АТГ ф.А",
+                name = "3АТГ ф.А",
+                type = EquipmentType.POWER_TRANSFORMER,
+                parameters = listOf(
+                    InspectionParameter("Уровень масла Бак", "°C", "<70"),
+                    InspectionParameter("Уровень масла РПН", "°C", "<70"),
+                    InspectionParameter("Температура ТС1", "°C", "<70"),
+                    InspectionParameter("Температура ТС2", "°C", "<70"),
+                    InspectionParameter("Давление во вводе 500кВ", "кгс/см²", ""),
+                    InspectionParameter("Давление во вводе 220кВ", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 1гр", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 2гр", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 3гр", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 4гр", "кгс/см²", ""),
+                )
+            ),
+            //Реактор
+            Equipment(
+                id = "Р-500 2С ф.С",
+                name = "Р-500 2С ф.С",
+                type = EquipmentType.POWER_TRANSFORMER,
+                parameters = listOf(
+                    InspectionParameter("Уровень масла Бак", "°C", "<70"),
+                    InspectionParameter("Температура ТС", "°C", "<70"),
+                    InspectionParameter("Давление во вводе 500кВ", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 1гр", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 2гр", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 3гр", "кгс/см²", ""),
+                )
+            )
+            ,Equipment(
+                id = "Р-500 2С ф.В",
+                name = "Р-500 2С ф.В",
+                type = EquipmentType.POWER_TRANSFORMER,
+                parameters = listOf(
+                    InspectionParameter("Уровень масла Бак", "°C", "<70"),
+                    InspectionParameter("Температура ТС", "°C", "<70"),
+                    InspectionParameter("Давление во вводе 500кВ", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 1гр", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 2гр", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 3гр", "кгс/см²", ""),
+                )
+            ),
+            Equipment(
+                id = "Р-500 2С ф.А",
+                name = "Р-500 2С ф.А",
+                type = EquipmentType.POWER_TRANSFORMER,
+                parameters = listOf(
+                    InspectionParameter("Уровень масла Бак", "°C", "<70"),
+                    InspectionParameter("Температура ТС", "°C", "<70"),
+                    InspectionParameter("Давление во вводе 500кВ", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 1гр", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 2гр", "кгс/см²", ""),
+                    InspectionParameter("Давление манометра маслонасоса 3гр", "кгс/см²", ""),
                 )
             ),
 
+        )
+    )
+    val oru500 = Oru(
+        voltage = "500",
+        name = "ОРУ-500",
+        listOf(
+            //В-500 Р-500 2С
+            Equipment(
+                id = "В-500 Р-500 2С",
+                name = "В-500 Р-500 2С",
+                type = EquipmentType.CIRCUIT_BREAKER,
+                parameters = listOf(
+                    InspectionParameter("Уровень продувки ф.А I эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.А II эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.В I эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.В II эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.С I эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.С II эл.", "", "0,5 - 1"),
+                )
+            ),
+            //яч. В-500 ВШТ-31
+            Equipment(
+                id = "В-500 ВШТ-31",
+                name = "В-500 ВШТ-31",
+                type = EquipmentType.CIRCUIT_BREAKER,
+                parameters = listOf(
+                    InspectionParameter("Давление элегаза ф.А", "", ""),
+                    InspectionParameter("Давление элегаза ф.В", "", ""),
+                    InspectionParameter("Давление элегаза ф.С", "", ""),
+                )
+            ),
+            Equipment(
+                id = "ТТ-500 ВШТ-31",
+                name = "ТТ-500 ВШТ-31",
+                type = EquipmentType.CURRENT_TRANSFORMER,
+                parameters = listOf(
+                    InspectionParameter("Уровень масла ф.А", "", ""),
+                    InspectionParameter("Уровень масла ф.В", "", ""),
+                    InspectionParameter("Уровень масла ф.С", "", ""),
+                )
+            ),
+            //яч. В-500 ВЛТ-30
+            Equipment(
+                id = "В-500 ВЛТ-30",
+                name = "В-500 ВЛТ-30",
+                type = EquipmentType.CIRCUIT_BREAKER,
+                parameters = listOf(
+                    InspectionParameter("Давление элегаза ф.А", "", ""),
+                    InspectionParameter("Давление элегаза ф.В", "", ""),
+                    InspectionParameter("Давление элегаза ф.С", "", ""),
+                )
+            ),
+            Equipment(
+                id = "ТТ-500 ВЛТ-30",
+                name = "ТТ-500 ВЛТ-30",
+                type = EquipmentType.CURRENT_TRANSFORMER,
+                parameters = listOf(
+                    InspectionParameter("Уровень масла ф.А", "", ""),
+                    InspectionParameter("Уровень масла ф.В", "", ""),
+                    InspectionParameter("Уровень масла ф.С", "", ""),
+                )
+            ),
+            //яч. В-500 ВШЛ-32
+            Equipment(
+                id = "В-500 ВШЛ-32",
+                name = "В-500 ВШЛ-32",
+                type = EquipmentType.CIRCUIT_BREAKER,
+                parameters = listOf(
+                    InspectionParameter("Уровень продувки ф.А I эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.А II эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.В I эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.В II эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.С I эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.С II эл.", "", "0,5 - 1"),
+                )
+            ),
+            Equipment(
+                id = "ТТ-500 ВШЛ-32",
+                name = "ТТ-500 ВШЛ-32",
+                type = EquipmentType.CURRENT_TRANSFORMER,
+                parameters = listOf(
+                    InspectionParameter("Уровень масла ф.А", "", ""),
+                    InspectionParameter("Уровень масла ф.В", "", ""),
+                    InspectionParameter("Уровень масла ф.С", "", ""),
+                )
+            ),
+            //яч. В-500 ВШЛ-21
+            Equipment(
+                id = "В-500 ВШЛ-21",
+                name = "В-500 ВШЛ-21",
+                type = EquipmentType.CIRCUIT_BREAKER,
+                parameters = listOf(
+                    InspectionParameter("Уровень продувки ф.А I эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.А II эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.В I эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.В II эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.С I эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.С II эл.", "", "0,5 - 1"),
+                )
+            ),
+            Equipment(
+                id = "ТТ-500 ВШЛ-21",
+                name = "ТТ-500 ВШЛ-21",
+                type = EquipmentType.CURRENT_TRANSFORMER,
+                parameters = listOf(
+                    InspectionParameter("Уровень масла ф.А", "", ""),
+                    InspectionParameter("Уровень масла ф.В", "", ""),
+                    InspectionParameter("Уровень масла ф.С", "", ""),
+                )
+            ),
+            //яч. В-500 ВШТ-22
+            Equipment(
+                id = "В-500 ВШТ-22",
+                name = "В-500 ВШТ-22",
+                type = EquipmentType.CIRCUIT_BREAKER,
+                parameters = listOf(
+                    InspectionParameter("Уровень продувки ф.А I эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.А II эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.В I эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.В II эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.С I эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.С II эл.", "", "0,5 - 1"),
+                )
+            ),
+            Equipment(
+                id = "ТТ-500 ВШТ-22",
+                name = "ТТ-500 ВШТ-22",
+                type = EquipmentType.CURRENT_TRANSFORMER,
+                parameters = listOf(
+                    InspectionParameter("Уровень масла ф.А", "", ""),
+                    InspectionParameter("Уровень масла ф.В", "", ""),
+                    InspectionParameter("Уровень масла ф.С", "", ""),
+                )
+            ),
+            //яч. В-500 ВЛТ-20
+            Equipment(
+                id = "В-500 ВЛТ-20",
+                name = "В-500 ВЛТ-20",
+                type = EquipmentType.CIRCUIT_BREAKER,
+                parameters = listOf(
+                    InspectionParameter("Уровень продувки ф.А I эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.А II эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.В I эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.В II эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.С I эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.С II эл.", "", "0,5 - 1"),
+                )
+            ),
+            Equipment(
+                id = "ТТ-500 ВЛТ-20",
+                name = "ТТ-500 ВЛТ-20",
+                type = EquipmentType.CURRENT_TRANSFORMER,
+                parameters = listOf(
+                    InspectionParameter("Уровень масла ф.А", "", ""),
+                    InspectionParameter("Уровень масла ф.В", "", ""),
+                    InspectionParameter("Уровень масла ф.С", "", ""),
+                )
+            ),
+            //яч. В-500 ВШТ-11
+            Equipment(
+                id = "В-500 ВШТ-11",
+                name = "В-500 ВШТ-11",
+                type = EquipmentType.CIRCUIT_BREAKER,
+                parameters = listOf(
+                    InspectionParameter("Уровень продувки ф.А I эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.А II эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.В I эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.В II эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.С I эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.С II эл.", "", "0,5 - 1"),
+                )
+            ),
+            Equipment(
+                id = "ТТ-500 ВШТ-11",
+                name = "ТТ-500 ВШТ-11",
+                type = EquipmentType.CURRENT_TRANSFORMER,
+                parameters = listOf(
+                    InspectionParameter("Уровень масла ф.А", "", ""),
+                    InspectionParameter("Уровень масла ф.В", "", ""),
+                    InspectionParameter("Уровень масла ф.С", "", ""),
+                )
+            ),
+            //яч. В-500 ВШЛ-12
+            Equipment(
+                id = "В-500 ВШЛ-12",
+                name = "В-500 ВШЛ-12",
+                type = EquipmentType.CIRCUIT_BREAKER,
+                parameters = listOf(
+                    InspectionParameter("Уровень продувки ф.А I эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.А II эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.В I эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.В II эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.С I эл.", "", "0,5 - 1"),
+                    InspectionParameter("Уровень продувки ф.С II эл.", "", "0,5 - 1"),
+                )
+            ),
+            Equipment(
+                id = "ТТ-500 ВШЛ-12",
+                name = "ТТ-500 ВШЛ-12",
+                type = EquipmentType.CURRENT_TRANSFORMER,
+                parameters = listOf(
+                    InspectionParameter("Уровень масла ф.А", "", ""),
+                    InspectionParameter("Уровень масла ф.В", "", ""),
+                    InspectionParameter("Уровень масла ф.С", "", ""),
+                )
+            ),
+            //ТТ-500 Трачуковская
+            Equipment(
+                id = "ТТ-500 Трачуковская",
+                name = "ТТ-500 Трачуковская",
+                type = EquipmentType.CURRENT_TRANSFORMER,
+                parameters = listOf(
+                    InspectionParameter("Уровень масла ф.А", "", ""),
+                    InspectionParameter("Уровень масла ф.В", "", ""),
+                    InspectionParameter("Уровень масла ф.С", "", ""),
+                )
+            ),
+            //Трансформаторы напряжения
+            Equipment(
+                id = "1ТН-500 Трачуковская",
+                name = "1ТН-500 Трачуковская",
+                type = EquipmentType.VOLTAGE_TRANSFORMER,
+                parameters = listOf(
+                    InspectionParameter("Уровень масла ф.А", "", ""),
+                    InspectionParameter("Уровень масла ф.В", "", ""),
+                    InspectionParameter("Уровень масла ф.С", "", ""),
+                )
+            ),
+            Equipment(
+                id = "2ТН-500 Трачуковская",
+                name = "2ТН-500 Трачуковская",
+                type = EquipmentType.VOLTAGE_TRANSFORMER,
+                parameters = listOf(
+                    InspectionParameter("Уровень масла ф.А", "", ""),
+                    InspectionParameter("Уровень масла ф.В", "", ""),
+                    InspectionParameter("Уровень масла ф.С", "", ""),
+                )
+            ),
+            Equipment(
+                id = "ТН-500 Белозёрная",
+                name = "ТН-500 Белозёрная",
+                type = EquipmentType.VOLTAGE_TRANSFORMER,
+                parameters = listOf(
+                    InspectionParameter("Уровень масла ф.А", "", ""),
+                    InspectionParameter("Уровень масла ф.В", "", ""),
+                    InspectionParameter("Уровень масла ф.С", "", ""),
+                )
+            ),
+            Equipment(
+                id = "1ТН-500",
+                name = "1ТН-500",
+                type = EquipmentType.VOLTAGE_TRANSFORMER,
+                parameters = listOf(
+                    InspectionParameter("Уровень масла ф.А 1 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.А 2 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.А 3 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.А 4 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.В 1 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.В 2 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.В 3 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.В 4 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.С 1 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.С 2 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.С 3 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.С 4 каскад", "", ""),
+                )
+            ),
+            Equipment(
+                id = "2ТН-500",
+                name = "2ТН-500",
+                type = EquipmentType.VOLTAGE_TRANSFORMER,
+                parameters = listOf(
+                    InspectionParameter("Уровень масла ф.А 1 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.А 2 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.А 3 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.А 4 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.В 1 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.В 2 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.В 3 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.В 4 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.С 1 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.С 2 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.С 3 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.С 4 каскад", "", ""),
+                )
+            ),
+            Equipment(
+                id = "ТН-500 СГРЭС-1",
+                name = "ТН-500 СГРЭС-1",
+                type = EquipmentType.VOLTAGE_TRANSFORMER,
+                parameters = listOf(
+                    InspectionParameter("Уровень масла ф.А 1 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.А 2 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.А 3 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.А 4 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.В 1 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.В 2 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.В 3 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.В 4 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.С 1 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.С 2 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.С 3 каскад", "", ""),
+                    InspectionParameter("Уровень масла ф.С 4 каскад", "", ""),
+                )
+            ),
         )
     )
 
@@ -411,7 +866,7 @@ object SubstationData {
         )
     )
 
-    val allOru = listOf(oru500, oru220, oru35)
+    val allOru = listOf(atg_reactor, oru500, oru220, oru35)
 
     fun getEquipmentGrouped(oru: Oru): Map<EquipmentType, List<Equipment>> {
         return when (oru.voltage) {
