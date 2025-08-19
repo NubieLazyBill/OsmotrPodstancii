@@ -116,7 +116,7 @@ fun OruInspectionScreen(oru: Oru, onBack: () -> Unit) {
                     Text(
                         text = when (type) {
                             EquipmentType.POWER_TRANSFORMER -> "Трансформаторы"
-                            EquipmentType.CIRCUIT_BREAKER -> "Выключатели"
+                            EquipmentType.CIRCUIT_BREAKER -> "Выключатели с ТТ"
                             EquipmentType.CURRENT_TRANSFORMER -> "Трансформаторы тока"
                             EquipmentType.VOLTAGE_TRANSFORMER -> "Трансформаторы напряжения"
                             else -> type.toString()
@@ -125,32 +125,66 @@ fun OruInspectionScreen(oru: Oru, onBack: () -> Unit) {
                         modifier = Modifier.padding(vertical = 8.dp)
                     )
 
-                    // Обычная сетка вместо LazyVerticalGrid
-                    val rows = (equipments.size + 2) / 3 // Вычисляем количество строк
-                    Column(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        repeat(rows) { rowIndex ->
-                            Row(
-                                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                                modifier = Modifier.fillMaxWidth()
-                            ) {
-                                for (colIndex in 0..2) {
-                                    val itemIndex = rowIndex * 3 + colIndex
-                                    if (itemIndex < equipments.size) {
-                                        val equipment = equipments[itemIndex]
-                                        Box(modifier = Modifier.weight(1f)) {
-                                            EquipmentCompactCard(
-                                                equipment = equipment,
-                                                inspectionData = inspectionData,
-                                                onParamChange = { key, value ->
-                                                    inspectionData = inspectionData + (key to value)
-                                                }
-                                            )
+                    if (oru.voltage == "220" && type == EquipmentType.CIRCUIT_BREAKER) {
+                        // Для ОРУ-220: пары выключатель + ТТ в две колонки
+                        val rows = (equipments.size + 1) / 2 // По два оборудования в строке
+                        Column(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            repeat(rows) { rowIndex ->
+                                Row(
+                                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                    modifier = Modifier.fillMaxWidth()
+                                ) {
+                                    for (colIndex in 0..1) {
+                                        val itemIndex = rowIndex * 2 + colIndex
+                                        if (itemIndex < equipments.size) {
+                                            val equipment = equipments[itemIndex]
+                                            Box(modifier = Modifier.weight(1f)) {
+                                                EquipmentCompactCard(
+                                                    equipment = equipment,
+                                                    inspectionData = inspectionData,
+                                                    onParamChange = { key, value ->
+                                                        inspectionData = inspectionData + (key to value)
+                                                    }
+                                                )
+                                            }
+                                        } else {
+                                            Spacer(modifier = Modifier.weight(1f))
                                         }
-                                    } else {
-                                        Spacer(modifier = Modifier.weight(1f))
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        // Стандартная сетка 3 колонки для остальных случаев
+                        val rows = (equipments.size + 2) / 3
+                        Column(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            repeat(rows) { rowIndex ->
+                                Row(
+                                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                    modifier = Modifier.fillMaxWidth()
+                                ) {
+                                    for (colIndex in 0..2) {
+                                        val itemIndex = rowIndex * 3 + colIndex
+                                        if (itemIndex < equipments.size) {
+                                            val equipment = equipments[itemIndex]
+                                            Box(modifier = Modifier.weight(1f)) {
+                                                EquipmentCompactCard(
+                                                    equipment = equipment,
+                                                    inspectionData = inspectionData,
+                                                    onParamChange = { key, value ->
+                                                        inspectionData = inspectionData + (key to value)
+                                                    }
+                                                )
+                                            }
+                                        } else {
+                                            Spacer(modifier = Modifier.weight(1f))
+                                        }
                                     }
                                 }
                             }

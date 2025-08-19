@@ -8,7 +8,6 @@ enum class EquipmentType {
     CIRCUIT_BREAKER,
     CURRENT_TRANSFORMER,
     VOLTAGE_TRANSFORMER,
-    AUXILIARY_TRANSFORMER
 }
 
 data class Oru(
@@ -415,6 +414,71 @@ object SubstationData {
     val allOru = listOf(oru500, oru220, oru35)
 
     fun getEquipmentGrouped(oru: Oru): Map<EquipmentType, List<Equipment>> {
-        return oru.equipments.groupBy { it.type }
+        return when (oru.voltage) {
+            "220" -> getEquipmentGrouped220(oru)
+            else -> oru.equipments.groupBy { it.type }
+        }
+    }
+
+    private fun getEquipmentGrouped220(oru: Oru): Map<EquipmentType, List<Equipment>> {
+        val result = mutableMapOf<EquipmentType, MutableList<Equipment>>()
+        val equipmentList = oru.equipments
+
+        // Создаем мапы для быстрого поиска
+        val breakers = equipmentList.filter { it.type == EquipmentType.CIRCUIT_BREAKER }
+        val transformers = equipmentList.filter { it.type == EquipmentType.CURRENT_TRANSFORMER }
+
+        // Функция для поиска соответствующего ТТ
+        fun findMatchingTT(breaker: Equipment): Equipment? {
+            val breakerName = breaker.name
+            return transformers.find { tt ->
+                when {
+                    // Стандартные пары: "В-220 Мирная" -> "ТТ-220 Мирная"
+                    breakerName.startsWith("В-220 ") && tt.name == "ТТ-220 ${breakerName.removePrefix("В-220 ")}" -> true
+
+                    // Специальные случаи:
+                    breakerName == "ОВ-220" && tt.name == "ТТ-220 ОВ" -> true
+                    breakerName == "ШСВ-220" && tt.name == "ТТ-220 ШСВ" -> true
+
+                    // Общий случай: если имя выключателя содержится в имени ТТ
+                    tt.name.contains(breakerName) -> true
+                    else -> false
+                }
+            }
+        }
+
+        // Обрабатываем все выключатели
+        breakers.forEach { breaker ->
+            val matchingTT = findMatchingTT(breaker)
+
+            if (matchingTT != null) {
+                // Добавляем пару выключатель + ТТ
+                result.getOrPut(EquipmentType.CIRCUIT_BREAKER) { mutableListOf() }.apply {
+                    add(breaker)
+                    add(matchingTT)
+                }
+            } else {
+                // Добавляем выключатель без пары
+                result.getOrPut(EquipmentType.CIRCUIT_BREAKER) { mutableListOf() }.add(breaker)
+            }
+        }
+
+        // Добавляем ТТ, которые не были добавлены в пары
+        transformers.forEach { tt ->
+            val isAlreadyAdded = result[EquipmentType.CIRCUIT_BREAKER]?.any { it.id == tt.id } == true
+            if (!isAlreadyAdded) {
+                result.getOrPut(EquipmentType.CURRENT_TRANSFORMER) { mutableListOf() }.add(tt)
+            }
+        }
+
+        // Добавляем все остальное оборудование (ТН и т.д.)
+        equipmentList.forEach { equipment ->
+            if (equipment.type != EquipmentType.CIRCUIT_BREAKER &&
+                equipment.type != EquipmentType.CURRENT_TRANSFORMER) {
+                result.getOrPut(equipment.type) { mutableListOf() }.add(equipment)
+            }
+        }
+
+        return result
     }
 }
