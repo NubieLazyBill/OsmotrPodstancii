@@ -1,7 +1,7 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
-    kotlin("jvm") version "1.9.20"
+    kotlin("jvm") version "1.9.22"
     id("org.jetbrains.compose") version "1.6.0"
 }
 
@@ -17,6 +17,10 @@ repositories {
 dependencies {
     implementation(compose.desktop.currentOs)
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    // Добавьте Material Icons Extended, если нужно больше иконок
+    implementation(compose.materialIconsExtended)
+    implementation(compose.desktop.currentOs)
+    implementation(compose.materialIconsExtended)
 }
 
 compose.desktop {

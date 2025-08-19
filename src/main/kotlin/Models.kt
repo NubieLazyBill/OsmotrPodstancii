@@ -95,27 +95,6 @@ object SubstationData {
                     InspectionParameter("Температура ТС", "°C", "<85")
                 )
             ),
-            // Выключатели
-            Equipment(
-                id = "В-35 2ТСН",
-                name = "В-35 2ТСН",
-                type = EquipmentType.CIRCUIT_BREAKER,
-                parameters = listOf(
-                    InspectionParameter("Уровень продувки ф.А", " ", "от 0,5 до 1"),
-                    InspectionParameter("Уровень продувки ф.В", " ", "от 0,5 до 1"),
-                    InspectionParameter("Уровень продувки ф.С", " ", "от 0,5 до 1"),
-                )
-            ),
-            Equipment(
-                id = "В-35 3ТСН",
-                name = "В-35 3ТСН",
-                type = EquipmentType.CIRCUIT_BREAKER,
-                parameters = listOf(
-                    InspectionParameter("Уровень продувки ф.А", " ", "от 0,5 до 1"),
-                    InspectionParameter("Уровень продувки ф.В", " ", "от 0,5 до 1"),
-                    InspectionParameter("Уровень продувки ф.С", " ", "от 0,5 до 1"),
-                )
-            ),
             // Трансформаторы тока
             Equipment(
                 id = "TT-35 2ТСН",
@@ -135,6 +114,27 @@ object SubstationData {
                     InspectionParameter("Уровень масла ф.А", " ", "от 0,3 до 0,9"),
                     InspectionParameter("Уровень масла ф.В", " ", "от 0,3 до 0,9"),
                     InspectionParameter("Уровень масла ф.С", " ", "от 0,3 до 0,9"),
+                )
+            ),
+            // Выключатели
+            Equipment(
+                id = "В-35 2ТСН",
+                name = "В-35 2ТСН",
+                type = EquipmentType.CIRCUIT_BREAKER,
+                parameters = listOf(
+                    InspectionParameter("Уровень продувки ф.А", " ", "от 0,5 до 1"),
+                    InspectionParameter("Уровень продувки ф.В", " ", "от 0,5 до 1"),
+                    InspectionParameter("Уровень продувки ф.С", " ", "от 0,5 до 1"),
+                )
+            ),
+            Equipment(
+                id = "В-35 3ТСН",
+                name = "В-35 3ТСН",
+                type = EquipmentType.CIRCUIT_BREAKER,
+                parameters = listOf(
+                    InspectionParameter("Уровень продувки ф.А", " ", "от 0,5 до 1"),
+                    InspectionParameter("Уровень продувки ф.В", " ", "от 0,5 до 1"),
+                    InspectionParameter("Уровень продувки ф.С", " ", "от 0,5 до 1"),
                 )
             ),
             //Трансформаторы напряжения
@@ -159,4 +159,8 @@ object SubstationData {
     )
 
     val allOru = listOf(oru500, oru35)
+
+    fun getEquipmentGrouped(oru: Oru): Map<EquipmentType, List<Equipment>> {
+        return oru.equipments.groupBy { it.type }
+    }
 }

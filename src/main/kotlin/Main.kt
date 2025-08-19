@@ -1,7 +1,7 @@
 package org.example
 
-import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -9,7 +9,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -64,79 +63,6 @@ fun OruSelectionScreen(oruList: List<Oru>, onOruSelected: (Oru) -> Unit) {
     }
 }
 
-@Composable
-fun EquipmentSelectionScreen(
-    oru: Oru,
-    onEquipmentSelected: (Equipment) -> Unit,
-    onBack: () -> Unit
-) {
-    Column(Modifier.fillMaxSize().padding(16.dp)) {
-        Text("ОРУ: ${oru.name}", style = MaterialTheme.typography.h5)
-        Spacer(Modifier.height(8.dp))
-        oru.equipments.forEach { equipment ->
-            Button(
-                onClick = { onEquipmentSelected(equipment) },
-                modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
-            ) {
-                Text(equipment.name)
-            }
-        }
-        Spacer(Modifier.weight(1f))
-        Button(onClick = onBack, modifier = Modifier.fillMaxWidth()) {
-            Text("Назад")
-        }
-    }
-}
-
-@Composable
-fun InspectionEntryScreen(
-    equipment: Equipment,
-    onSave: (Map<String, String>, String) -> Unit,
-    onBack: () -> Unit
-) {
-    var parameters by remember { mutableStateOf<Map<String, String>>(emptyMap()) }
-    var comments by remember { mutableStateOf("") }
-
-    Column(Modifier.fillMaxSize().padding(16.dp)) {
-        Text("Оборудование: ${equipment.name}", style = MaterialTheme.typography.h5)
-        Spacer(Modifier.height(16.dp))
-
-        equipment.parameters.forEach { param ->
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(vertical = 4.dp)
-            ) {
-                Text("${param.name} (${param.normalValue}):", modifier = Modifier.weight(1f))
-                OutlinedTextField(
-                    value = parameters[param.name] ?: "",
-                    onValueChange = { parameters = parameters + (param.name to it) },
-                    modifier = Modifier.weight(1f)
-                )
-            }
-        }
-
-        OutlinedTextField(
-            value = comments,
-            onValueChange = { comments = it },
-            label = { Text("Комментарии") },
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        Row(
-            Modifier.fillMaxWidth().padding(top = 16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Button(onClick = onBack) { Text("Назад") }
-            Button(onClick = { onSave(parameters, comments) }) { Text("Сохранить") }
-        }
-    }
-}
-
-@Composable
-fun EmptyScreen() {
-    Box(Modifier.fillMaxSize())
-}
-
 fun main() = application {
     Window(
         onCloseRequest = ::exitApplication,
@@ -148,64 +74,131 @@ fun main() = application {
 
 @Composable
 fun OruInspectionScreen(oru: Oru, onBack: () -> Unit) {
+    val groupedEquipment = remember { SubstationData.getEquipmentGrouped(oru) }
     var inspectionData by remember { mutableStateOf<Map<String, String>>(emptyMap()) }
     val scrollState = rememberScrollState()
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp)
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
     ) {
         // Шапка
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            IconButton(onClick = onBack) { Icon(Icons.Default.ArrowBack, "Назад") }
-            Text("ОРУ-${oru.voltage} кВ", style = MaterialTheme.typography.h6)
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            IconButton(onClick = onBack) {
+                Icon(Icons.Filled.ArrowBack, "Назад")
+            }
+            Text(
+                "ОРУ-${oru.voltage} кВ",
+                style = MaterialTheme.typography.h6,
+                modifier = Modifier.weight(1f)
+            )
         }
 
-        // Сетка оборудования (3 столбца)
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(3), // 3 столбца
-            modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Основной контент
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
         ) {
-            items(oru.equipments) { equipment ->
-                EquipmentCompactCard(equipment, inspectionData) { key, value ->
-                    inspectionData = inspectionData + (key to value)
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .verticalScroll(scrollState)
+            ) {
+                groupedEquipment.forEach { (type, equipments) ->
+                    // Заголовок группы
+                    Text(
+                        text = when (type) {
+                            EquipmentType.POWER_TRANSFORMER -> "Трансформаторы"
+                            EquipmentType.CIRCUIT_BREAKER -> "Выключатели"
+                            EquipmentType.CURRENT_TRANSFORMER -> "Трансформаторы тока"
+                            EquipmentType.VOLTAGE_TRANSFORMER -> "Трансформаторы напряжения"
+                            else -> type.toString()
+                        },
+                        style = MaterialTheme.typography.subtitle1,
+                        modifier = Modifier.padding(vertical = 8.dp)
+                    )
+
+                    // Обычная сетка вместо LazyVerticalGrid
+                    val rows = (equipments.size + 2) / 3 // Вычисляем количество строк
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        repeat(rows) { rowIndex ->
+                            Row(
+                                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                for (colIndex in 0..2) {
+                                    val itemIndex = rowIndex * 3 + colIndex
+                                    if (itemIndex < equipments.size) {
+                                        val equipment = equipments[itemIndex]
+                                        Box(modifier = Modifier.weight(1f)) {
+                                            EquipmentCompactCard(
+                                                equipment = equipment,
+                                                inspectionData = inspectionData,
+                                                onParamChange = { key, value ->
+                                                    inspectionData = inspectionData + (key to value)
+                                                }
+                                            )
+                                        }
+                                    } else {
+                                        Spacer(modifier = Modifier.weight(1f))
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(16.dp))
                 }
             }
         }
 
-        // Кнопка сохранения
-        Button(onClick = { /* Сохранить */ }, modifier = Modifier.fillMaxWidth()) {
+        Button(
+            onClick = { /* Сохранить */ },
+            modifier = Modifier.fillMaxWidth()
+        ) {
             Text("Завершить осмотр")
         }
     }
 }
 
+
+// EquipmentCompactCard.kt
 @Composable
 fun EquipmentCompactCard(
     equipment: Equipment,
     inspectionData: Map<String, String>,
     onParamChange: (String, String) -> Unit
 ) {
-    Card(elevation = 4.dp) {
-        Column(modifier = Modifier.padding(8.dp)) {
-            // Название оборудования (уменьшаем шрифт)
+    Card(
+        elevation = 4.dp,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column(
+            modifier = Modifier.padding(8.dp)
+        ) {
             Text(
-                text = equipment.name,
-                style = MaterialTheme.typography.body1,
+                equipment.name,
+                fontSize = 14.sp,
                 maxLines = 2,
-                overflow = TextOverflow.Ellipsis
+                modifier = Modifier.padding(bottom = 4.dp)
             )
 
-            // Параметры (компактные поля)
             equipment.parameters.forEach { param ->
                 OutlinedTextField(
                     value = inspectionData["${equipment.id}_${param.name}"] ?: "",
                     onValueChange = { onParamChange("${equipment.id}_${param.name}", it) },
-                    label = { Text(param.name, fontSize = 12.sp) }, // Меньший шрифт
-                    placeholder = { Text("Норма: ${param.normalValue}", fontSize = 10.sp) },
+                    label = { Text(param.name, fontSize = 10.sp) },
                     modifier = Modifier.fillMaxWidth(),
-                    singleLine = true // Однострочный ввод
+                    singleLine = true
                 )
             }
         }
