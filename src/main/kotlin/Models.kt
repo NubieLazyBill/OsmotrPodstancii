@@ -86,6 +86,15 @@ object SubstationData {
                     InspectionParameter("Температура ТС", "°C", "<85")
                 )
             ),
+            Equipment(
+                id = "4ТСН",
+                name = "4ТСН",
+                type = EquipmentType.POWER_TRANSFORMER,
+                parameters = listOf(
+                    InspectionParameter("Уровень масла РУМ", "°C", "-40 до +60"),
+                    InspectionParameter("Температура ТС", "°C", "<85")
+                )
+            ),
             // Выключатели
             Equipment(
                 id = "В-35 2ТСН",
