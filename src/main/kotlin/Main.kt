@@ -91,7 +91,7 @@ fun OruInspectionScreen(oru: Oru, onBack: () -> Unit) {
                 Icon(Icons.Filled.ArrowBack, "Назад")
             }
             Text(
-                "ОРУ-${oru.voltage} кВ",
+                if (oru.voltage == "0") "Здания и сооружения" else "ОРУ-${oru.voltage} кВ",
                 style = MaterialTheme.typography.h6,
                 modifier = Modifier.weight(1f)
             )
@@ -126,6 +126,13 @@ fun OruInspectionScreen(oru: Oru, onBack: () -> Unit) {
                             inspectionData = inspectionData + (key to value)
                         }
                     )
+                    "0" -> BuildingsInspectionLayout( // Новый экран для зданий
+                        oru = oru,
+                        inspectionData = inspectionData,
+                        onParamChange = { key, value ->
+                            inspectionData = inspectionData + (key to value)
+                        }
+                    )
                     else -> {
                         val groupedEquipment = remember { SubstationData.getEquipmentGrouped(oru) }
                         StandardOruInspectionLayout(
@@ -147,6 +154,86 @@ fun OruInspectionScreen(oru: Oru, onBack: () -> Unit) {
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Завершить осмотр")
+        }
+    }
+}
+
+// Новый компактный компонент для зданий
+@Composable
+fun BuildingCompactCard(
+    equipment: Equipment,
+    inspectionData: Map<String, String>,
+    onParamChange: (String, String) -> Unit
+) {
+    Card(
+        elevation = 4.dp,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column(
+            modifier = Modifier.padding(8.dp)
+        ) {
+            Text(
+                equipment.name,
+                fontSize = 14.sp,
+                maxLines = 2,
+                modifier = Modifier.padding(bottom = 4.dp)
+            )
+
+            equipment.parameters.forEach { param ->
+                OutlinedTextField(
+                    value = inspectionData["${equipment.id}_${param.name}"] ?: "",
+                    onValueChange = { onParamChange("${equipment.id}_${param.name}", it) },
+                    label = { Text(param.name, fontSize = 10.sp) },
+                    modifier = Modifier.fillMaxWidth(),
+                    singleLine = true
+                )
+            }
+        }
+    }
+}
+
+// Новый экран для зданий
+@Composable
+fun BuildingsInspectionLayout(
+    oru: Oru,
+    inspectionData: Map<String, String>,
+    onParamChange: (String, String) -> Unit
+) {
+    Column {
+        Text(
+            text = "Здания и сооружения подстанции",
+            style = MaterialTheme.typography.h6,
+            modifier = Modifier.padding(vertical = 16.dp)
+        )
+
+        // Отображаем здания в сетке 2 колонки для компактности
+        val rows = (oru.equipments.size + 1) / 2
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            repeat(rows) { rowIndex ->
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    for (colIndex in 0..1) {
+                        val itemIndex = rowIndex * 2 + colIndex
+                        if (itemIndex < oru.equipments.size) {
+                            val equipment = oru.equipments[itemIndex]
+                            Box(modifier = Modifier.weight(1f)) {
+                                BuildingCompactCard(
+                                    equipment = equipment,
+                                    inspectionData = inspectionData,
+                                    onParamChange = onParamChange
+                                )
+                            }
+                        } else {
+                            Spacer(modifier = Modifier.weight(1f))
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -465,7 +552,8 @@ fun AtgReactorInspectionLayout(
         "2АТГ ф.С", "2АТГ ф.В", "2АТГ ф.А",  // 2АТГ в ряд
         "АТГ-резерв",                         // АТГ-резерв одиночно
         "3АТГ ф.С", "3АТГ ф.В", "3АТГ ф.А",  // 3АТГ в ряд
-        "Р-500 2С ф.С", "Р-500 2С ф.В", "Р-500 2С ф.А"  // Реактор в ряд
+        "Р-500 2С ф.С", "Р-500 2С ф.В", "Р-500 2С ф.А",  // Реактор в ряд
+        "Р-500 резерв"                        // Резервная фаза реактора (только пломбы)
     ).mapNotNull { equipmentMap[it] }
 
     Column {
@@ -509,7 +597,6 @@ fun AtgReactorInspectionLayout(
             orderedEquipment
                 .find { it.name == "АТГ-резерв" }
                 ?.let { equipment ->
-                    // Ограничиваем ширину, как у других АТГ
                     Box(modifier = Modifier.weight(1f)) {
                         EquipmentCompactCard(
                             equipment = equipment,
@@ -518,7 +605,6 @@ fun AtgReactorInspectionLayout(
                         )
                     }
                 }
-            // Добавляем пустые места для выравнивания
             Spacer(modifier = Modifier.weight(1f))
             Spacer(modifier = Modifier.weight(1f))
         }
@@ -551,7 +637,7 @@ fun AtgReactorInspectionLayout(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Реактор
+        // Реактор Р-500 2С
         Text(
             text = "Реактор Р-500 2С",
             style = MaterialTheme.typography.h6,
@@ -563,7 +649,7 @@ fun AtgReactorInspectionLayout(
             modifier = Modifier.fillMaxWidth()
         ) {
             orderedEquipment
-                .filter { it.name.startsWith("Р-500") }
+                .filter { it.name.startsWith("Р-500 2С ф") }
                 .forEach { equipment ->
                     Box(modifier = Modifier.weight(1f)) {
                         EquipmentCompactCard(
@@ -573,6 +659,34 @@ fun AtgReactorInspectionLayout(
                         )
                     }
                 }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Резервная фаза реактора (только пломбы)
+        Text(
+            text = "Резервная фаза реактора",
+            style = MaterialTheme.typography.h6,
+            modifier = Modifier.padding(vertical = 8.dp)
+        )
+
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            orderedEquipment
+                .find { it.name == "Р-500 резерв" }
+                ?.let { equipment ->
+                    Box(modifier = Modifier.weight(1f)) {
+                        EquipmentCompactCard(
+                            equipment = equipment,
+                            inspectionData = inspectionData,
+                            onParamChange = onParamChange
+                        )
+                    }
+                }
+            Spacer(modifier = Modifier.weight(1f))
+            Spacer(modifier = Modifier.weight(1f))
         }
     }
 }

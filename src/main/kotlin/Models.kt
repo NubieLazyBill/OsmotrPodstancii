@@ -8,6 +8,7 @@ enum class EquipmentType {
     CIRCUIT_BREAKER,
     CURRENT_TRANSFORMER,
     VOLTAGE_TRANSFORMER,
+    BUILDING,
 }
 
 data class Oru(
@@ -115,6 +116,8 @@ object SubstationData {
                     InspectionParameter("Давление манометра маслонасоса 2гр", "кгс/см²", ""),
                     InspectionParameter("Давление манометра маслонасоса 3гр", "кгс/см²", ""),
                     InspectionParameter("Давление манометра маслонасоса 4гр", "кгс/см²", ""),
+                    InspectionParameter("Пломбы на вент. задвижках", "", "установлены"),
+                    InspectionParameter("Пломбы на задвижках в откр. полож.", "", "установлены"),
                 )
             ),
             Equipment(
@@ -206,6 +209,16 @@ object SubstationData {
                     InspectionParameter("Давление манометра маслонасоса 1гр", "кгс/см²", ""),
                     InspectionParameter("Давление манометра маслонасоса 2гр", "кгс/см²", ""),
                     InspectionParameter("Давление манометра маслонасоса 3гр", "кгс/см²", ""),
+                )
+            ),
+            //Реактор резерв
+            Equipment(
+                id = "Р-500 резерв",
+                name = "Р-500 резерв",
+                type = EquipmentType.POWER_TRANSFORMER,
+                parameters = listOf(
+                    InspectionParameter("Пломбы на вент. задвижках", "", "установлены"),
+                    InspectionParameter("Пломбы на задвижках в откр. полож.", "", "установлены")
                 )
             ),
 
@@ -514,6 +527,18 @@ object SubstationData {
                     InspectionParameter("Уровень масла ф.С 4 каскад", "", ""),
                 )
             ),
+            //Проверка трубопроводов воздушной сети
+            Equipment(
+                id = "air_pipes_500",
+                name = "Трубопроводы воздушной сети ОРУ-500",
+                type = EquipmentType.BUILDING,
+                parameters = listOf(
+                    InspectionParameter("Состояние трубопроводов", "", "исправно"),
+                    InspectionParameter("Отсутствие утечек", "", "норма"),
+                    InspectionParameter("Давление в системе", "кгс/см²", "норма"),
+                    InspectionParameter("Примечание", "", "")
+                )
+            )
         )
     )
 
@@ -767,7 +792,18 @@ object SubstationData {
                     InspectionParameter("Уровень масла ф.В верхний каскад", "", ""),
                 )
             ),
-
+            //проверка трубопроводов
+            Equipment(
+                id = "air_pipes_220",
+                name = "Трубопроводы воздушной сети ОРУ-220",
+                type = EquipmentType.BUILDING,
+                parameters = listOf(
+                    InspectionParameter("Состояние трубопроводов", "", "исправно"),
+                    InspectionParameter("Отсутствие утечек", "", "норма"),
+                    InspectionParameter("Давление в системе", "кгс/см²", "норма"),
+                    InspectionParameter("Примечание", "", "")
+                )
+            ),
         )
     )
 
@@ -862,11 +898,146 @@ object SubstationData {
                     InspectionParameter("Уровень масла", " ", "от -60 до 40"),
                 )
             ),
+            //Проверка трубопроводов
+            Equipment(
+                id = "air_pipes_35",
+                name = "Трубопроводы воздушной сети ОРУ-35",
+                type = EquipmentType.BUILDING,
+                parameters = listOf(
+                    InspectionParameter("Состояние трубопроводов", "", "исправно"),
+                    InspectionParameter("Отсутствие утечек", "", "норма"),
+                    InspectionParameter("Давление в системе", "кгс/см²", "норма"),
+                    InspectionParameter("Примечание", "", "")
+                )
+            ),
 
         )
     )
 
-    val allOru = listOf(atg_reactor, oru500, oru220, oru35)
+    val buildingsOru = Oru(
+        voltage = "0",
+        name = "Здания и сооружения",
+        equipments = listOf(
+            Equipment(
+                id = "compressor1",
+                name = "Компрессорная №1",
+                type = EquipmentType.BUILDING,
+                parameters = listOf(
+                    InspectionParameter("Работоспособность обогрева", "", "исправно"),
+                    InspectionParameter("Температура", "°C", "+5...+30"),
+                    InspectionParameter("Примечание", "", "")
+                )
+            ),
+            Equipment(
+                id = "balloon1",
+                name = "Баллонная №1",
+                type = EquipmentType.BUILDING,
+                parameters = listOf(
+                    InspectionParameter("Работоспособность обогрева", "", "исправно"),
+                    InspectionParameter("Температура", "°C", "+5...+30"),
+                    InspectionParameter("Примечание", "", "")
+                )
+            ),
+            Equipment(
+                id = "compressor2",
+                name = "Компрессорная №2",
+                type = EquipmentType.BUILDING,
+                parameters = listOf(
+                    InspectionParameter("Работоспособность обогрева", "", "исправно"),
+                    InspectionParameter("Температура", "°C", "+5...+30"),
+                    InspectionParameter("Примечание", "", "")
+                )
+            ),
+            Equipment(
+                id = "balloon2",
+                name = "Баллонная №2",
+                type = EquipmentType.BUILDING,
+                parameters = listOf(
+                    InspectionParameter("Работоспособность обогрева", "", "исправно"),
+                    InspectionParameter("Температура", "°C", "+5...+30"),
+                    InspectionParameter("Примечание", "", "")
+                )
+            ),
+            Equipment(
+                id = "kpz_opu",
+                name = "КПЗ ОПУ",
+                type = EquipmentType.BUILDING,
+                parameters = listOf(
+                    InspectionParameter("Работоспособность обогрева", "", "исправно"),
+                    InspectionParameter("Температура", "°C", "+18...+24"),
+                    InspectionParameter("Примечание", "", "")
+                )
+            ),
+            Equipment(
+                id = "kpz2",
+                name = "КПЗ-2",
+                type = EquipmentType.BUILDING,
+                parameters = listOf(
+                    InspectionParameter("Работоспособность обогрева", "", "исправно"),
+                    InspectionParameter("Температура", "°C", "+18...+24"),
+                    InspectionParameter("Примечание", "", "")
+                )
+            ),
+            Equipment(
+                id = "fire_pump",
+                name = "Насосная пожаротушения",
+                type = EquipmentType.BUILDING,
+                parameters = listOf(
+                    InspectionParameter("Работоспособность обогрева", "", "исправно"),
+                    InspectionParameter("Температура", "°C", "+5...+30"),
+                    InspectionParameter("Примечание", "", "")
+                )
+            ),
+            Equipment(
+                id = "vv_workshop",
+                name = "Мастерская по ремонту ВВ",
+                type = EquipmentType.BUILDING,
+                parameters = listOf(
+                    InspectionParameter("Температура", "°C", "+5...+30"),
+                    InspectionParameter("Примечание", "", "")
+                )
+            ),
+            Equipment(
+                id = "art_well",
+                name = "Артскважина",
+                type = EquipmentType.BUILDING,
+                parameters = listOf(
+                    InspectionParameter("Температура", "°C", "+5...+30"),
+                    InspectionParameter("Примечание", "", "")
+                )
+            ),
+            Equipment(
+                id = "art_well_building",
+                name = "Здание артезианской скважины",
+                type = EquipmentType.BUILDING,
+                parameters = listOf(
+                    InspectionParameter("Температура", "°C", "+5...+30"),
+                    InspectionParameter("Примечание", "", "")
+                )
+            ),
+            Equipment(
+                id = "ab_room",
+                name = "Помещение 1 (2) АБ",
+                type = EquipmentType.BUILDING,
+                parameters = listOf(
+                    InspectionParameter("Температура", "°C", "+15...+25"),
+                    InspectionParameter("Примечание", "", "")
+                )
+            ),
+            Equipment(
+                id = "basement_rooms",
+                name = "Помещение п/этажа №1,2,3",
+                type = EquipmentType.BUILDING,
+                parameters = listOf(
+                    InspectionParameter("Температура", "°C", "+5...+30"),
+                    InspectionParameter("Примечание", "", "")
+                )
+            )
+        )
+    )
+
+
+    val allOru = listOf(atg_reactor, oru500, oru220, oru35, buildingsOru)
 
     fun getEquipmentGrouped(oru: Oru): Map<EquipmentType, List<Equipment>> {
         return when (oru.voltage) {
