@@ -1,10 +1,6 @@
 package org.example
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
@@ -14,7 +10,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Window
@@ -209,7 +204,7 @@ fun BuildingCompactCard(
     }
 }
 
-// Новый экран для зданий
+//Экран для зданий
 @Composable
 fun BuildingsInspectionLayout(
     oru: Oru,
@@ -750,7 +745,7 @@ fun AboutScreen(onBack: () -> Unit) {
         )
 
         Text(
-            "\"Проще энергетика отучить на программиста, \nчем программисту изучить всю энергетику\" \n" +
+            "\"Проще энергетику научиться программированию, \nчем программиста переучить на энергетика\" \n" +
                     "                                                Матвеев О.А.",
             fontStyle = FontStyle.Italic,
             modifier = Modifier.padding(vertical = 24.dp)
