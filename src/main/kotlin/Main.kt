@@ -116,7 +116,7 @@ fun OruInspectionScreen(oru: Oru, onBack: () -> Unit) {
                     Text(
                         text = when (type) {
                             EquipmentType.POWER_TRANSFORMER -> "Трансформаторы"
-                            EquipmentType.CIRCUIT_BREAKER -> "Выключатели с ТТ"
+                            EquipmentType.CIRCUIT_BREAKER -> "Выключатели"
                             EquipmentType.CURRENT_TRANSFORMER -> "Трансформаторы тока"
                             EquipmentType.VOLTAGE_TRANSFORMER -> "Трансформаторы напряжения"
                             else -> type.toString()
