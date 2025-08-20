@@ -871,6 +871,7 @@ object SubstationData {
     fun getEquipmentGrouped(oru: Oru): Map<EquipmentType, List<Equipment>> {
         return when (oru.voltage) {
             "220" -> getEquipmentGrouped220(oru)
+            "500" -> oru.equipments.groupBy { it.type } // Для ОРУ-500 используем стандартную группировку
             else -> oru.equipments.groupBy { it.type }
         }
     }
