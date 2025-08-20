@@ -41,7 +41,8 @@ data class InspectionResult(
 
 enum class AppScreen {
     ORU_SELECTION,
-    ORU_INSPECTION  // Новый экран для осмотра всего ОРУ
+    ORU_INSPECTION,
+    ABOUT
 }
 
 object SubstationData {

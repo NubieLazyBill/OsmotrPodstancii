@@ -13,6 +13,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -31,7 +32,8 @@ fun App() {
                 onOruSelected = {
                     selectedOru = it
                     currentScreen = AppScreen.ORU_INSPECTION
-                }
+                },
+                onAbout = { currentScreen = AppScreen.ABOUT }
             )
 
             AppScreen.ORU_INSPECTION -> selectedOru?.let { oru ->
@@ -43,12 +45,17 @@ fun App() {
                 currentScreen = AppScreen.ORU_SELECTION
                 Box {}
             }
+
+            AppScreen.ABOUT -> AboutScreen(
+                onBack = { currentScreen = AppScreen.ORU_SELECTION }
+            )
         }
     }
 }
 
+
 @Composable
-fun OruSelectionScreen(oruList: List<Oru>, onOruSelected: (Oru) -> Unit) {
+fun OruSelectionScreen(oruList: List<Oru>, onOruSelected: (Oru) -> Unit, onAbout: () -> Unit) {
     Column(Modifier.fillMaxSize().padding(16.dp)) {
         Text("Выберите ОРУ", style = MaterialTheme.typography.h4)
         Spacer(Modifier.height(16.dp))
@@ -59,6 +66,16 @@ fun OruSelectionScreen(oruList: List<Oru>, onOruSelected: (Oru) -> Unit) {
             ) {
                 Text(oru.name)
             }
+        }
+
+        // Кнопка "О программе"
+        Spacer(modifier = Modifier.height(32.dp))
+        Button(
+            onClick = onAbout,
+            modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary)
+        ) {
+            Text("О программе")
         }
     }
 }
@@ -688,5 +705,61 @@ fun AtgReactorInspectionLayout(
             Spacer(modifier = Modifier.weight(1f))
             Spacer(modifier = Modifier.weight(1f))
         }
+    }
+}
+
+@Composable
+fun AboutScreen(onBack: () -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(24.dp)
+            .verticalScroll(rememberScrollState())
+    ) {
+        IconButton(onClick = onBack) {
+            Icon(Icons.Filled.ArrowBack, "Назад")
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Text(
+            "ОсмотрПС",
+            style = MaterialTheme.typography.h4,
+            modifier = Modifier.padding(vertical = 16.dp)
+        )
+
+        Text(
+            "Программа для проведения осмотра подстанции",
+            style = MaterialTheme.typography.body1,
+            modifier = Modifier.padding(bottom = 24.dp)
+        )
+
+        Text(
+            "Посвящается",
+            style = MaterialTheme.typography.h6,
+            modifier = Modifier.padding(bottom = 8.dp)
+        )
+
+        Text(
+            "Матвееву Олегу Александровичу\n" +
+                    "Мастеру-масленщику МЭС Западной Сибири\n" +
+                    "Человеку, стоявшему у истоков подстанции\n" +
+                    "1948-2020",
+            style = MaterialTheme.typography.body2,
+            modifier = Modifier.padding(vertical = 16.dp)
+        )
+
+        Text(
+            "\"Проще энергетика отучить на программиста, \nчем программисту изучить всю энергетику\" \n" +
+                    "                                                Матвеев О.А.",
+            fontStyle = FontStyle.Italic,
+            modifier = Modifier.padding(vertical = 24.dp)
+        )
+
+        Text(
+            "Версия 1.0",
+            style = MaterialTheme.typography.caption,
+            modifier = Modifier.padding(top = 32.dp)
+        )
     }
 }
