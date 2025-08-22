@@ -1,8 +1,11 @@
 package org.example
 
+import kotlinx.serialization.Serializable
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.UUID
 
+@Serializable
 enum class EquipmentType {
     POWER_TRANSFORMER,
     CIRCUIT_BREAKER,
@@ -11,12 +14,14 @@ enum class EquipmentType {
     BUILDING,
 }
 
+@Serializable
 data class Oru(
     val voltage: String,
     val name: String,
     val equipments: List<Equipment>
 )
 
+@Serializable
 data class Equipment(
     val id: String,
     val name: String,
@@ -24,26 +29,38 @@ data class Equipment(
     val parameters: List<InspectionParameter>
 )
 
+@Serializable
 data class InspectionParameter(
     val name: String,
     val unit: String?,
     val normalValue: String
 )
 
+@Serializable
 data class InspectionResult(
-    val oru: Oru,
     val equipment: Equipment,
-    val parameters: Map<String, String>,
+    val parameters: Map<String, String>, // key: paramName, value: userInput
     val dateTime: String = LocalDateTime.now()
         .format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")),
     val comments: String = ""
 )
 
+@Serializable
+data class InspectionSession(
+    val id: String = UUID.randomUUID().toString(),
+    val dateTime: LocalDateTime = LocalDateTime.now(),
+    val oru: Oru,
+    val results: List<InspectionResult>,
+    val isCompleted: Boolean = false
+)
+
 enum class AppScreen {
     ORU_SELECTION,
     ORU_INSPECTION,
-    ABOUT
+    ABOUT,
+    HISTORY
 }
+
 
 object SubstationData {
     val atg_reactor = Oru(

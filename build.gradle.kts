@@ -17,9 +17,7 @@ repositories {
 dependencies {
     implementation(compose.desktop.currentOs)
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
-    // Добавьте Material Icons Extended, если нужно больше иконок
-    implementation(compose.materialIconsExtended)
-    implementation(compose.desktop.currentOs)
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
     implementation(compose.materialIconsExtended)
 }
 

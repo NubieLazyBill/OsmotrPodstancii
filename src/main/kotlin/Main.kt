@@ -3,6 +3,9 @@ package org.example
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.clickable
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -14,6 +17,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import java.io.File
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.UUID
 
 @Composable
 fun App() {
@@ -28,7 +38,12 @@ fun App() {
                     selectedOru = it
                     currentScreen = AppScreen.ORU_INSPECTION
                 },
-                onAbout = { currentScreen = AppScreen.ABOUT }
+                onAbout = { currentScreen = AppScreen.ABOUT },
+                onHistory = { currentScreen = AppScreen.HISTORY }
+            )
+
+            AppScreen.HISTORY -> HistoryScreen(
+                onBack = { currentScreen = AppScreen.ORU_SELECTION }
             )
 
             AppScreen.ORU_INSPECTION -> selectedOru?.let { oru ->
@@ -50,10 +65,16 @@ fun App() {
 
 
 @Composable
-fun OruSelectionScreen(oruList: List<Oru>, onOruSelected: (Oru) -> Unit, onAbout: () -> Unit) {
+fun OruSelectionScreen(
+    oruList: List<Oru>,
+    onOruSelected: (Oru) -> Unit,
+    onAbout: () -> Unit,
+    onHistory: () -> Unit
+) {
     Column(Modifier.fillMaxSize().padding(16.dp)) {
         Text("Выберите ОРУ", style = MaterialTheme.typography.h4)
         Spacer(Modifier.height(16.dp))
+
         oruList.forEach { oru ->
             Button(
                 onClick = { onOruSelected(oru) },
@@ -63,8 +84,18 @@ fun OruSelectionScreen(oruList: List<Oru>, onOruSelected: (Oru) -> Unit, onAbout
             }
         }
 
+        // Кнопка "История осмотров"
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(
+            onClick = onHistory,
+            modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondaryVariant)
+        ) {
+            Text("История осмотров")
+        }
+
         // Кнопка "О программе"
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(16.dp))
         Button(
             onClick = onAbout,
             modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
@@ -76,8 +107,13 @@ fun OruSelectionScreen(oruList: List<Oru>, onOruSelected: (Oru) -> Unit, onAbout
 }
 
 fun main() = application {
+    InspectionRepository.loadFromFile()
+
     Window(
-        onCloseRequest = ::exitApplication,
+        onCloseRequest = {
+            InspectionRepository.saveToFile()
+            exitApplication()
+        },
         title = "Осмотр ПС"
     ) {
         App()
@@ -88,6 +124,7 @@ fun main() = application {
 fun OruInspectionScreen(oru: Oru, onBack: () -> Unit) {
     var inspectionData by remember { mutableStateOf<Map<String, String>>(emptyMap()) }
     val scrollState = rememberScrollState()
+    var showSaveDialog by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -162,12 +199,58 @@ fun OruInspectionScreen(oru: Oru, onBack: () -> Unit) {
         }
 
         Button(
-            onClick = { /* Сохранить */ },
+            onClick = { showSaveDialog = true },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Завершить осмотр")
         }
     }
+
+    if (showSaveDialog) {
+        SaveInspectionDialog(
+            onConfirm = {
+                saveInspectionResults(oru, inspectionData)
+                showSaveDialog = false
+                onBack()
+            },
+            onDismiss = { showSaveDialog = false }
+        )
+    }
+}
+
+@Composable
+fun SaveInspectionDialog(onConfirm: () -> Unit, onDismiss: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Завершение осмотра") },
+        text = { Text("Сохранить результаты осмотра?") },
+        confirmButton = {
+            Button(onClick = onConfirm) {
+                Text("Сохранить")
+            }
+        },
+        dismissButton = {
+            Button(onClick = onDismiss) {
+                Text("Отмена")
+            }
+        }
+    )
+}
+
+private fun saveInspectionResults(oru: Oru, data: Map<String, String>) {
+    val results = mutableListOf<InspectionResult>()
+
+    oru.equipments.forEach { equipment ->
+        val equipmentParams = mutableMapOf<String, String>()
+        equipment.parameters.forEach { param ->
+            val key = "${equipment.id}_${param.name}"
+            equipmentParams[param.name] = data[key] ?: ""
+        }
+        results.add(InspectionResult(equipment, equipmentParams))
+    }
+
+    val session = InspectionSession(oru = oru, results = results, isCompleted = true)
+    InspectionRepository.saveSession(session)
 }
 
 // Новый компактный компонент для зданий
@@ -745,7 +828,7 @@ fun AboutScreen(onBack: () -> Unit) {
         )
 
         Text(
-            "\"Проще энергетику научиться программированию, \nчем программиста переучить на энергетика\" \n" +
+            "\"Проще энергетику научиться программировать, \nчем программиста переучить на энергетика\" \n" +
                     "                                                Матвеев О.А.",
             fontStyle = FontStyle.Italic,
             modifier = Modifier.padding(vertical = 24.dp)
@@ -756,5 +839,61 @@ fun AboutScreen(onBack: () -> Unit) {
             style = MaterialTheme.typography.caption,
             modifier = Modifier.padding(top = 32.dp)
         )
+    }
+}
+
+@Composable
+fun HistoryScreen(onBack: () -> Unit) {
+    val sessions by remember { mutableStateOf(InspectionRepository.getSessions()) }
+
+    Column(Modifier.fillMaxSize().padding(16.dp)) {
+        IconButton(onClick = onBack) {
+            Icon(Icons.Filled.ArrowBack, "Назад")
+        }
+
+        Text("История осмотров", style = MaterialTheme.typography.h4)
+
+        LazyColumn {
+            items(sessions) { session ->
+                HistoryItem(session) {
+                    // Просмотр деталей осмотра
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun HistoryItem(session: InspectionSession, onViewDetails: () -> Unit) {
+    Card(
+        elevation = 4.dp,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+            .clickable { onViewDetails() }
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(
+                session.oru.name,
+                style = MaterialTheme.typography.h6
+            )
+            Text(
+                "Дата: ${session.dateTime.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"))}",
+                style = MaterialTheme.typography.body2
+            )
+            Text(
+                "Оборудование: ${session.results.size}",
+                style = MaterialTheme.typography.body2
+            )
+            if (session.isCompleted) {
+                Text(
+                    "Завершено",
+                    color = MaterialTheme.colors.primary,
+                    style = MaterialTheme.typography.caption
+                )
+            }
+        }
     }
 }
