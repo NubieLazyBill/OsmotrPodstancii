@@ -1,6 +1,8 @@
 package org.example
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.UUID
@@ -48,11 +50,16 @@ data class InspectionResult(
 @Serializable
 data class InspectionSession(
     val id: String = UUID.randomUUID().toString(),
-    val dateTime: LocalDateTime = LocalDateTime.now(),
+    val dateTimeString: String = LocalDateTime.now()
+        .format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")),
     val oru: Oru,
     val results: List<InspectionResult>,
     val isCompleted: Boolean = false
-)
+) {
+    // Добавим computed property для удобства
+    val dateTime: LocalDateTime
+        get() = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"))
+}
 
 enum class AppScreen {
     ORU_SELECTION,

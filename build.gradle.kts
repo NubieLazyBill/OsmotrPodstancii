@@ -3,6 +3,7 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 plugins {
     kotlin("jvm") version "1.9.22"
     id("org.jetbrains.compose") version "1.6.0"
+    //kotlin("plugin.serialization") version "1.9.0" // плагин сериализации
 }
 
 group = "org.example"
@@ -50,4 +51,13 @@ tasks.jar {
     from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     archiveFileName.set("OsmotrPS-fat.jar")
+}
+
+kotlin {
+    sourceSets.all {
+        languageSettings {
+            optIn("kotlin.RequiresOptIn")
+            optIn("kotlinx.serialization.ExperimentalSerializationApi")
+        }
+    }
 }

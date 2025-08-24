@@ -123,10 +123,10 @@ fun OruSelectionScreen(
 }
 
 fun main() = application {
-    InspectionRepository.loadFromFile()
 
     Window(
         onCloseRequest = {
+            // Сохраняем при закрытии на всякий случай
             InspectionRepository.saveToFile()
             exitApplication()
         },
@@ -897,7 +897,7 @@ fun HistoryItem(session: InspectionSession, onViewDetails: (InspectionSession) -
                 style = MaterialTheme.typography.h6
             )
             Text(
-                "Дата: ${session.dateTime.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"))}",
+                "Дата: ${session.dateTimeString}", // ИЗМЕНИЛИ ЗДЕСЬ
                 style = MaterialTheme.typography.body2
             )
             Text(
@@ -938,7 +938,7 @@ fun InspectionDetailsScreen(session: InspectionSession, onBack: () -> Unit) {
 
         // Информация о сессии
         Text(
-            "Дата и время: ${session.dateTime.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"))}",
+            "Дата и время: ${session.dateTimeString}", // ИЗМЕНИЛИ ЗДЕСЬ
             style = MaterialTheme.typography.body1
         )
 
