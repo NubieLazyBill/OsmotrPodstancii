@@ -3,7 +3,7 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 plugins {
     kotlin("jvm") version "1.9.22"
     id("org.jetbrains.compose") version "1.6.0"
-    //kotlin("plugin.serialization") version "1.9.0" // плагин сериализации
+    kotlin("plugin.serialization") version "1.9.22"
 }
 
 group = "org.example"
@@ -31,13 +31,11 @@ compose.desktop {
             packageName = "OsmotrPS"
             packageVersion = "1.0.0"
 
-            //appResourcesRootDir.set(project.layout.projectDirectory.dir("resources"))
-
             windows {
                 menuGroup = "Осмотр ПС"
                 upgradeUuid = "5a0b8d38-1b19-46d0-ba32-5a9a9a9a9a9a"
-                iconFile.set(project.file("icon.ico")) // опционально - иконка
-                perUserInstall = true // установка для текущего пользователя
+                iconFile.set(project.file("icon.ico"))
+                perUserInstall = true
             }
         }
     }
@@ -47,7 +45,6 @@ tasks.jar {
     manifest {
         attributes["Main-Class"] = "org.example.MainKt"
     }
-    // Включаем все зависимости в JAR
     from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     archiveFileName.set("OsmotrPS-fat.jar")
