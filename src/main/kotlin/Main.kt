@@ -9,6 +9,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.FileDownload
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -41,7 +42,8 @@ fun App() {
                     currentScreen = AppScreen.ORU_INSPECTION
                 },
                 onAbout = { currentScreen = AppScreen.ABOUT },
-                onHistory = { currentScreen = AppScreen.HISTORY }
+                onHistory = { currentScreen = AppScreen.HISTORY },
+                onExport = { currentScreen = AppScreen.EXPORT } // ← Добавьте эту строку
             )
 
             AppScreen.HISTORY -> HistoryScreen(
@@ -75,6 +77,10 @@ fun App() {
             AppScreen.ABOUT -> AboutScreen(
                 onBack = { currentScreen = AppScreen.ORU_SELECTION }
             )
+
+            AppScreen.EXPORT -> ExportScreen( // ← Добавьте этот case
+                onBack = { currentScreen = AppScreen.ORU_SELECTION }
+            )
         }
     }
 }
@@ -85,7 +91,8 @@ fun OruSelectionScreen(
     oruList: List<Oru>,
     onOruSelected: (Oru) -> Unit,
     onAbout: () -> Unit,
-    onHistory: () -> Unit
+    onHistory: () -> Unit,
+    onExport: () -> Unit // ← Добавьте этот параметр
 ) {
     Column(Modifier.fillMaxSize().padding(16.dp)) {
         Text("Выберите ОРУ", style = MaterialTheme.typography.h4)
@@ -108,6 +115,16 @@ fun OruSelectionScreen(
             colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondaryVariant)
         ) {
             Text("История осмотров")
+        }
+
+        // Кнопка "Экспорт данных" ← Добавьте эту кнопку
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(
+            onClick = onExport,
+            modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.primaryVariant)
+        ) {
+            Text("Экспорт данных")
         }
 
         // Кнопка "О программе"
@@ -817,7 +834,7 @@ fun AboutScreen(onBack: () -> Unit) {
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            "ОсмотрПС",
+            "Осмотр ПС 500кВ Кустовая",
             style = MaterialTheme.typography.h4,
             modifier = Modifier.padding(vertical = 16.dp)
         )
@@ -826,21 +843,6 @@ fun AboutScreen(onBack: () -> Unit) {
             "Программа для проведения осмотра подстанции",
             style = MaterialTheme.typography.body1,
             modifier = Modifier.padding(bottom = 24.dp)
-        )
-
-        Text(
-            "Посвящается",
-            style = MaterialTheme.typography.h6,
-            modifier = Modifier.padding(bottom = 8.dp)
-        )
-
-        Text(
-            "Матвееву Олегу Александровичу\n" +
-                    "Мастеру-масленщику МЭС Западной Сибири\n" +
-                    "Человеку, стоявшему у истоков подстанции\n" +
-                    "1948-2020",
-            style = MaterialTheme.typography.body2,
-            modifier = Modifier.padding(vertical = 16.dp)
         )
 
         Text(
@@ -975,5 +977,127 @@ fun InspectionDetailsScreen(session: InspectionSession, onBack: () -> Unit) {
                 }
             }
         }
+    }
+}
+
+@Composable
+fun ExportScreen(onBack: () -> Unit) {
+    var exportPath by remember { mutableStateOf("") }
+
+    Column(Modifier.fillMaxSize().padding(16.dp)) {
+        // Шапка
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            IconButton(onClick = onBack) {
+                Icon(Icons.Filled.ArrowBack, "Назад")
+            }
+            Text("Экспорт данных", style = MaterialTheme.typography.h4)
+        }
+
+        Spacer(Modifier.height(24.dp))
+
+        // Статистика
+        val sessions = InspectionRepository.getSessions()
+        Text("Всего осмотров: ${sessions.size}")
+        Text("Всего записей: ${sessions.sumOf { it.results.size }}")
+
+        Spacer(Modifier.height(24.dp))
+
+        // Кнопки экспорта
+        Button(
+            onClick = {
+                exportPath = exportToCSV()
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Icon(Icons.Default.FileDownload, "Экспорт в CSV")
+            Spacer(Modifier.width(8.dp))
+            Text("Экспорт в CSV")
+        }
+
+        Spacer(Modifier.height(16.dp))
+
+        // Информация о экспорте
+        if (exportPath.isNotBlank()) {
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                backgroundColor = MaterialTheme.colors.primary.copy(alpha = 0.1f)
+            ) {
+                Column(Modifier.padding(16.dp)) {
+                    Text("Экспорт завершен!", color = MaterialTheme.colors.primary)
+                    Text("Файл: $exportPath", fontSize = 12.sp)
+                    Text("Откройте файл в Excel или другом редакторе", fontSize = 12.sp)
+                }
+            }
+        }
+    }
+}
+
+fun exportToCSV(fileName: String = "осмотры_подстанции_${System.currentTimeMillis()}.csv"): String {
+    try {
+        val file = File(fileName)
+        // Явно указываем кодировку UTF-8 с BOM для правильного отображения в Excel
+        val writer = file.bufferedWriter(Charsets.UTF_8)
+
+        // Добавляем BOM (Byte Order Mark) для UTF-8
+        writer.write("\uFEFF")
+
+        // Заголовок CSV
+        writer.write("Дата;Время;ОРУ;Напряжение;Оборудование;Тип оборудования;Параметр;Значение;Норма;Статус;Комментарии")
+        writer.newLine()
+
+        InspectionRepository.getSessions().forEach { session ->
+            session.results.forEach { result ->
+                result.parameters.forEach { (paramName, value) ->
+                    val normalValue = result.equipment.parameters
+                        .find { it.name == paramName }
+                        ?.normalValue ?: ""
+
+                    // Определяем статус (норма/не норма)
+                    val status = if (normalValue.isNotBlank() && value.isNotBlank()) {
+                        when {
+                            value.matches(Regex("норма|исправно|установлены")) -> "✅ Норма"
+                            normalValue.contains("-") -> { // Диапазон значений
+                                val range = normalValue.split("-")
+                                if (range.size == 2) {
+                                    val min = range[0].trim().replace(",", ".").toDoubleOrNull()
+                                    val max = range[1].trim().replace(",", ".").toDoubleOrNull()
+                                    val numValue = value.replace(",", ".").toDoubleOrNull()
+
+                                    if (min != null && max != null && numValue != null) {
+                                        if (numValue in min..max) "✅ Норма" else "⚠️ Не норма"
+                                    } else {
+                                        "⚪ Не проверено"
+                                    }
+                                } else {
+                                    "⚪ Не проверено"
+                                }
+                            }
+                            else -> if (value == normalValue) "✅ Норма" else "⚠️ Не норма"
+                        }
+                    } else {
+                        "⚪ Не проверено"
+                    }
+
+                    val dateTimeParts = session.dateTimeString.split(" ")
+                    val date = dateTimeParts.getOrElse(0) { "" }
+                    val time = dateTimeParts.getOrElse(1) { "" }
+
+                    writer.write(
+                        "$date;$time;${session.oru.name};${session.oru.voltage};" +
+                                "${result.equipment.name};${result.equipment.type};" +
+                                "$paramName;$value;$normalValue;$status;${result.comments}"
+                    )
+                    writer.newLine()
+                }
+            }
+        }
+
+        writer.close()
+        println("Данные экспортированы в: ${file.absolutePath}")
+        return file.absolutePath
+
+    } catch (e: Exception) {
+        println("Ошибка экспорта: ${e.message}")
+        throw e
     }
 }

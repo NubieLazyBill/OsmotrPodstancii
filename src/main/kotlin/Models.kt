@@ -67,6 +67,7 @@ enum class AppScreen {
     ABOUT,
     HISTORY,
     INSPECTION_DETAILS,
+    EXPORT,
 }
 
 

@@ -78,3 +78,64 @@ object InspectionRepository {
         println("Сессия $sessionId не найдена")
     }
 }
+
+
+internal fun exportSessionsToCSV(fileName: String = "inspections_export_${System.currentTimeMillis()}.csv") {
+    try {
+        val file = File(fileName)
+        // Явно указываем кодировку UTF-8 с BOM
+        val writer = file.bufferedWriter(Charsets.UTF_8)
+
+        // Добавляем BOM (Byte Order Mark) для UTF-8
+        writer.write("\uFEFF")
+
+        // Заголовок CSV с разделителем-точкой с запятой (стандарт для Excel)
+        writer.write("Дата осмотра;Время осмотра;ОРУ;Напряжение;Оборудование;Тип оборудования;Параметр;Значение;Нормальное значение;Комментарии")
+        writer.newLine()
+
+        InspectionRepository.getSessions().forEach { session ->
+            session.results.forEach { result ->
+                result.parameters.forEach { (paramName, value) ->
+                    // Находим нормальное значение для этого параметра
+                    val normalValue = result.equipment.parameters
+                        .find { it.name == paramName }
+                        ?.normalValue ?: ""
+
+                    // Разделяем дату и время для удобства сортировки в Excel
+                    val dateTimeParts = session.dateTimeString.split(" ")
+                    val date = dateTimeParts.getOrElse(0) { "" }
+                    val time = dateTimeParts.getOrElse(1) { "" }
+
+                    writer.write(
+                        "$date;" +  // Дата
+                                "$time;" +  // Время
+                                "${session.oru.name};" +  // Название ОРУ
+                                "${session.oru.voltage};" +  // Напряжение
+                                "${result.equipment.name};" +  // Оборудование
+                                "${result.equipment.type};" +  // Тип оборудования
+                                "$paramName;" +  // Название параметра
+                                "$value;" +  // Значение параметра
+                                "$normalValue;" +  // Нормальное значение
+                                "${result.comments}"  // Комментарии
+                    )
+                    writer.newLine()
+                }
+            }
+        }
+
+        writer.close()
+        println("Данные экспортированы в: ${file.absolutePath}")
+
+        // Показываем сообщение пользователю (опционально)
+        showExportSuccessMessage(file.absolutePath)
+
+    } catch (e: Exception) {
+        println("Ошибка экспорта: ${e.message}")
+    }
+}
+
+// Дополнительная функция для показа сообщения (если нужно)
+private fun showExportSuccessMessage(filePath: String) {
+    // Здесь можно добавить вывод в лог или всплывающее окно
+    println("✅ Экспорт завершен! Файл: $filePath")
+}
