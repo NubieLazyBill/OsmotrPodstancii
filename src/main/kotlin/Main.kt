@@ -13,6 +13,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Window
@@ -29,6 +30,7 @@ import java.util.UUID
 fun App() {
     var currentScreen by remember { mutableStateOf(AppScreen.ORU_SELECTION) }
     var selectedOru by remember { mutableStateOf<Oru?>(null) }
+    var selectedSession by remember { mutableStateOf<InspectionSession?>(null) }
 
     MaterialTheme {
         when (currentScreen) {
@@ -43,8 +45,22 @@ fun App() {
             )
 
             AppScreen.HISTORY -> HistoryScreen(
-                onBack = { currentScreen = AppScreen.ORU_SELECTION }
+                onBack = { currentScreen = AppScreen.ORU_SELECTION },
+                onViewDetails = { session ->
+                    selectedSession = session
+                    currentScreen = AppScreen.INSPECTION_DETAILS
+                }
             )
+
+            AppScreen.INSPECTION_DETAILS -> selectedSession?.let { session ->
+                InspectionDetailsScreen(
+                    session = session,
+                    onBack = { currentScreen = AppScreen.HISTORY }
+                )
+            } ?: run {
+                currentScreen = AppScreen.HISTORY
+                Box {}
+            }
 
             AppScreen.ORU_INSPECTION -> selectedOru?.let { oru ->
                 OruInspectionScreen(
@@ -843,7 +859,10 @@ fun AboutScreen(onBack: () -> Unit) {
 }
 
 @Composable
-fun HistoryScreen(onBack: () -> Unit) {
+fun HistoryScreen(
+    onBack: () -> Unit,
+    onViewDetails: (InspectionSession) -> Unit  // Добавим параметр
+) {
     val sessions by remember { mutableStateOf(InspectionRepository.getSessions()) }
 
     Column(Modifier.fillMaxSize().padding(16.dp)) {
@@ -855,22 +874,20 @@ fun HistoryScreen(onBack: () -> Unit) {
 
         LazyColumn {
             items(sessions) { session ->
-                HistoryItem(session) {
-                    // Просмотр деталей осмотра
-                }
+                HistoryItem(session, onViewDetails)
             }
         }
     }
 }
 
 @Composable
-fun HistoryItem(session: InspectionSession, onViewDetails: () -> Unit) {
+fun HistoryItem(session: InspectionSession, onViewDetails: (InspectionSession) -> Unit) {
     Card(
         elevation = 4.dp,
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
-            .clickable { onViewDetails() }
+            .clickable { onViewDetails(session) }
     ) {
         Column(
             modifier = Modifier.padding(16.dp)
@@ -893,6 +910,69 @@ fun HistoryItem(session: InspectionSession, onViewDetails: () -> Unit) {
                     color = MaterialTheme.colors.primary,
                     style = MaterialTheme.typography.caption
                 )
+            }
+        }
+    }
+}
+
+@Composable
+fun InspectionDetailsScreen(session: InspectionSession, onBack: () -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+            .verticalScroll(rememberScrollState())
+    ) {
+        // Шапка
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            IconButton(onClick = onBack) {
+                Icon(Icons.Filled.ArrowBack, "Назад")
+            }
+            Text(
+                "Детали осмотра: ${session.oru.name}",
+                style = MaterialTheme.typography.h6
+            )
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Информация о сессии
+        Text(
+            "Дата и время: ${session.dateTime.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"))}",
+            style = MaterialTheme.typography.body1
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Результаты осмотра
+        Text("Результаты осмотра:", style = MaterialTheme.typography.h6)
+
+        session.results.forEach { result ->
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
+                elevation = 4.dp
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Text(
+                        result.equipment.name,
+                        style = MaterialTheme.typography.subtitle1
+                    )
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    result.parameters.forEach { (paramName, value) ->
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(paramName, fontWeight = FontWeight.Bold)
+                            Text(value)
+                        }
+                        Spacer(modifier = Modifier.height(4.dp))
+                    }
+                }
             }
         }
     }

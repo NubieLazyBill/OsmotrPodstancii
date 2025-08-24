@@ -58,7 +58,8 @@ enum class AppScreen {
     ORU_SELECTION,
     ORU_INSPECTION,
     ABOUT,
-    HISTORY
+    HISTORY,
+    INSPECTION_DETAILS,
 }
 
 

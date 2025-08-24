@@ -26,14 +26,28 @@ compose.desktop {
         mainClass = "org.example.MainKt"
 
         nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb, TargetFormat.Exe)
             packageName = "OsmotrPS"
             packageVersion = "1.0.0"
+
+            //appResourcesRootDir.set(project.layout.projectDirectory.dir("resources"))
 
             windows {
                 menuGroup = "Осмотр ПС"
                 upgradeUuid = "5a0b8d38-1b19-46d0-ba32-5a9a9a9a9a9a"
+                iconFile.set(project.file("icon.ico")) // опционально - иконка
+                perUserInstall = true // установка для текущего пользователя
             }
         }
     }
+}
+
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "org.example.MainKt"
+    }
+    // Включаем все зависимости в JAR
+    from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    archiveFileName.set("OsmotrPS-fat.jar")
 }
