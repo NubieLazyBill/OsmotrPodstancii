@@ -10,6 +10,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.FileDownload
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,6 +27,81 @@ import java.io.File
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.UUID
+import androidx.compose.ui.graphics.Color
+import org.example.exportSingleSessionToCSV
+
+
+// Модель для уведомлений
+data class Notification(
+    val id: String = UUID.randomUUID().toString(),
+    val message: String,
+    val type: NotificationType = NotificationType.SUCCESS
+)
+
+enum class NotificationType {
+    SUCCESS, ERROR, INFO
+}
+
+// Глобальное состояние для уведомлений
+object NotificationManager {
+    val notifications = mutableStateListOf<Notification>()
+
+    fun showNotification(message: String, type: NotificationType = NotificationType.SUCCESS) {
+        notifications.add(Notification(message = message, type = type))
+
+        // Автоматическое скрытие через 5 секунд
+        Thread {
+            Thread.sleep(5000)
+            notifications.removeAll { it.id == notifications.lastOrNull()?.id }
+        }.start()
+    }
+
+    fun removeNotification(id: String) {
+        notifications.removeAll { it.id == id }
+    }
+}
+
+// Компонент для отображения уведомлений
+@Composable
+fun NotificationToast() {
+    val notifications = NotificationManager.notifications
+
+    if (notifications.isNotEmpty()) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            contentAlignment = Alignment.TopCenter
+        ) {
+            Column {
+                notifications.forEach { notification ->
+                    val backgroundColor = when (notification.type) {
+                        NotificationType.SUCCESS -> Color.Green.copy(alpha = 0.9f)
+                        NotificationType.ERROR -> Color.Red.copy(alpha = 0.9f)
+                        NotificationType.INFO -> Color.Blue.copy(alpha = 0.9f)
+                    }
+
+                    Card(
+                        backgroundColor = backgroundColor,
+                        elevation = 8.dp,
+                        modifier = Modifier
+                            .fillMaxWidth(0.8f)
+                            .padding(vertical = 4.dp)
+                            .clickable {
+                                NotificationManager.removeNotification(notification.id)
+                            }
+                    ) {
+                        Text(
+                            text = notification.message,
+                            color = Color.White,
+                            modifier = Modifier.padding(16.dp)
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
 
 @Composable
 fun App() {
@@ -42,8 +118,7 @@ fun App() {
                     currentScreen = AppScreen.ORU_INSPECTION
                 },
                 onAbout = { currentScreen = AppScreen.ABOUT },
-                onHistory = { currentScreen = AppScreen.HISTORY },
-                onExport = { currentScreen = AppScreen.EXPORT } // ← Добавьте эту строку
+                onHistory = { currentScreen = AppScreen.HISTORY }
             )
 
             AppScreen.HISTORY -> HistoryScreen(
@@ -78,9 +153,7 @@ fun App() {
                 onBack = { currentScreen = AppScreen.ORU_SELECTION }
             )
 
-            AppScreen.EXPORT -> ExportScreen( // ← Добавьте этот case
-                onBack = { currentScreen = AppScreen.ORU_SELECTION }
-            )
+            // Убираем AppScreen.EXPORT - он больше не нужен
         }
     }
 }
@@ -91,8 +164,8 @@ fun OruSelectionScreen(
     oruList: List<Oru>,
     onOruSelected: (Oru) -> Unit,
     onAbout: () -> Unit,
-    onHistory: () -> Unit,
-    onExport: () -> Unit // ← Добавьте этот параметр
+    onHistory: () -> Unit
+    // Убираем onExport
 ) {
     Column(Modifier.fillMaxSize().padding(16.dp)) {
         Text("Выберите ОРУ", style = MaterialTheme.typography.h4)
@@ -115,16 +188,6 @@ fun OruSelectionScreen(
             colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondaryVariant)
         ) {
             Text("История осмотров")
-        }
-
-        // Кнопка "Экспорт данных" ← Добавьте эту кнопку
-        Spacer(modifier = Modifier.height(16.dp))
-        Button(
-            onClick = onExport,
-            modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
-            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.primaryVariant)
-        ) {
-            Text("Экспорт данных")
         }
 
         // Кнопка "О программе"
@@ -863,27 +926,99 @@ fun AboutScreen(onBack: () -> Unit) {
 @Composable
 fun HistoryScreen(
     onBack: () -> Unit,
-    onViewDetails: (InspectionSession) -> Unit  // Добавим параметр
+    onViewDetails: (InspectionSession) -> Unit
 ) {
     val sessions by remember { mutableStateOf(InspectionRepository.getSessions()) }
+    var showDeleteDialog by remember { mutableStateOf<String?>(null) }
 
-    Column(Modifier.fillMaxSize().padding(16.dp)) {
-        IconButton(onClick = onBack) {
-            Icon(Icons.Filled.ArrowBack, "Назад")
-        }
+    Box(modifier = Modifier.fillMaxSize()) {
+        Column(Modifier.fillMaxSize().padding(16.dp)) {
+            IconButton(onClick = onBack) {
+                Icon(Icons.Filled.ArrowBack, "Назад")
+            }
 
-        Text("История осмотров", style = MaterialTheme.typography.h4)
+            Text("История осмотров", style = MaterialTheme.typography.h4)
 
-        LazyColumn {
-            items(sessions) { session ->
-                HistoryItem(session, onViewDetails)
+            // Кнопка экспорта всех данных
+            Button(
+                onClick = {
+                    try {
+                        val path = exportToCSV()
+                        NotificationManager.showNotification("✅ Все данные экспортированы в: ${File(path).name}")
+                    } catch (e: Exception) {
+                        NotificationManager.showNotification("❌ Ошибка экспорта: ${e.message}", NotificationType.ERROR)
+                    }
+                },
+                modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.primaryVariant)
+            ) {
+                Icon(Icons.Default.FileDownload, "Экспорт всех данных")
+                Spacer(Modifier.width(8.dp))
+                Text("Экспортировать все данные в CSV")
+            }
+
+            if (sessions.isEmpty()) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .weight(1f),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text("Нет сохраненных осмотров", style = MaterialTheme.typography.h6)
+                }
+            } else {
+                LazyColumn(modifier = Modifier.weight(1f)) {
+                    items(sessions) { session ->
+                        HistoryItem(
+                            session = session,
+                            onViewDetails = onViewDetails,
+                            onDelete = { showDeleteDialog = session.id }
+                        )
+                    }
+                }
             }
         }
+
+        // Уведомления - ДОБАВЬТЕ ЭТУ СТРОЧКУ
+        NotificationToast()
+    }
+
+    // Диалог подтверждения удаления
+    showDeleteDialog?.let { sessionId ->
+        AlertDialog(
+            onDismissRequest = { showDeleteDialog = null },
+            title = { Text("Подтверждение удаления") },
+            text = { Text("Вы уверены, что хотите удалить этот осмотр?") },
+            confirmButton = {
+                Button(
+                    onClick = {
+                        InspectionRepository.deleteSession(sessionId)
+                        showDeleteDialog = null
+                        NotificationManager.showNotification("🗑️ Осмотр удален")
+                    }
+                ) {
+                    Text("Удалить")
+                }
+            },
+            dismissButton = {
+                Button(
+                    onClick = { showDeleteDialog = null }
+                ) {
+                    Text("Отмена")
+                }
+            }
+        )
     }
 }
 
 @Composable
-fun HistoryItem(session: InspectionSession, onViewDetails: (InspectionSession) -> Unit) {
+fun HistoryItem(
+    session: InspectionSession,
+    onViewDetails: (InspectionSession) -> Unit,
+    onDelete: () -> Unit
+) {
+    var showContextMenu by remember { mutableStateOf(false) }
+
     Card(
         elevation = 4.dp,
         modifier = Modifier
@@ -894,24 +1029,68 @@ fun HistoryItem(session: InspectionSession, onViewDetails: (InspectionSession) -
         Column(
             modifier = Modifier.padding(16.dp)
         ) {
-            Text(
-                session.oru.name,
-                style = MaterialTheme.typography.h6
-            )
-            Text(
-                "Дата: ${session.dateTimeString}", // ИЗМЕНИЛИ ЗДЕСЬ
-                style = MaterialTheme.typography.body2
-            )
-            Text(
-                "Оборудование: ${session.results.size}",
-                style = MaterialTheme.typography.body2
-            )
-            if (session.isCompleted) {
-                Text(
-                    "Завершено",
-                    color = MaterialTheme.colors.primary,
-                    style = MaterialTheme.typography.caption
-                )
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        session.oru.name,
+                        style = MaterialTheme.typography.h6
+                    )
+                    Text(
+                        "Дата: ${session.dateTimeString}",
+                        style = MaterialTheme.typography.body2
+                    )
+                    Text(
+                        "Оборудование: ${session.results.size}",
+                        style = MaterialTheme.typography.body2
+                    )
+                    if (session.isCompleted) {
+                        Text(
+                            "Завершено",
+                            color = MaterialTheme.colors.primary,
+                            style = MaterialTheme.typography.caption
+                        )
+                    }
+                }
+
+                IconButton(
+                    onClick = { showContextMenu = true }
+                ) {
+                    Icon(Icons.Default.MoreVert, "Действия")
+                }
+            }
+        }
+    }
+
+    // Контекстное меню
+    if (showContextMenu) {
+        DropdownMenu(
+            expanded = showContextMenu,
+            onDismissRequest = { showContextMenu = false }
+        ) {
+            DropdownMenuItem(
+                onClick = {
+                    showContextMenu = false
+                    onDelete()
+                }
+            ) {
+                Text("Удалить осмотр")
+            }
+            DropdownMenuItem(
+                onClick = {
+                    showContextMenu = false
+                    try {
+                        val path = exportSingleSessionToCSV(session)
+                        NotificationManager.showNotification("📊 Осмотр экспортирован в: ${File(path).name}")
+                    } catch (e: Exception) {
+                        NotificationManager.showNotification("❌ Ошибка экспорта: ${e.message}", NotificationType.ERROR)
+                    }
+                }
+            ) {
+                Text("Экспортировать в CSV")
             }
         }
     }

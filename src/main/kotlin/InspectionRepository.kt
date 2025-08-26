@@ -139,3 +139,69 @@ private fun showExportSuccessMessage(filePath: String) {
     // Здесь можно добавить вывод в лог или всплывающее окно
     println("✅ Экспорт завершен! Файл: $filePath")
 }
+
+// Функция для экспорта конкретной сессии
+// В InspectionRepository.kt
+internal fun exportSingleSessionToCSV(session: InspectionSession, fileName: String = "осмотр_${session.oru.name}_${System.currentTimeMillis()}.csv"): String {
+    try {
+        val file = File(fileName)
+        val writer = file.bufferedWriter(Charsets.UTF_8)
+
+        writer.write("\uFEFF") // BOM для UTF-8
+
+        writer.write("Дата;Время;ОРУ;Напряжение;Оборудование;Тип оборудования;Параметр;Значение;Норма;Статус;Комментарии")
+        writer.newLine()
+
+        session.results.forEach { result ->
+            result.parameters.forEach { (paramName, value) ->
+                val normalValue = result.equipment.parameters
+                    .find { it.name == paramName }
+                    ?.normalValue ?: ""
+
+                val status = if (normalValue.isNotBlank() && value.isNotBlank()) {
+                    when {
+                        value.matches(Regex("норма|исправно|установлены")) -> "✅ Норма"
+                        normalValue.contains("-") -> {
+                            val range = normalValue.split("-")
+                            if (range.size == 2) {
+                                val min = range[0].trim().replace(",", ".").toDoubleOrNull()
+                                val max = range[1].trim().replace(",", ".").toDoubleOrNull()
+                                val numValue = value.replace(",", ".").toDoubleOrNull()
+
+                                if (min != null && max != null && numValue != null) {
+                                    if (numValue in min..max) "✅ Норма" else "⚠️ Не норма"
+                                } else {
+                                    "⚪ Не проверено"
+                                }
+                            } else {
+                                "⚪ Не проверено"
+                            }
+                        }
+                        else -> if (value == normalValue) "✅ Норма" else "⚠️ Не норма"
+                    }
+                } else {
+                    "⚪ Не проверено"
+                }
+
+                val dateTimeParts = session.dateTimeString.split(" ")
+                val date = dateTimeParts.getOrElse(0) { "" }
+                val time = dateTimeParts.getOrElse(1) { "" }
+
+                writer.write(
+                    "$date;$time;${session.oru.name};${session.oru.voltage};" +
+                            "${result.equipment.name};${result.equipment.type};" +
+                            "$paramName;$value;$normalValue;$status;${result.comments}"
+                )
+                writer.newLine()
+            }
+        }
+
+        writer.close()
+        println("Данные экспортированы в: ${file.absolutePath}")
+        return file.absolutePath
+
+    } catch (e: Exception) {
+        println("Ошибка экспорта: ${e.message}")
+        throw e
+    }
+}
