@@ -8,9 +8,11 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.clickable
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.FileDownload
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.SwapHoriz
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,7 +32,8 @@ import java.util.UUID
 import androidx.compose.ui.graphics.Color
 import org.example.exportSingleSessionToCSV
 import org.example.exportToCSV
-import org.example.exportSingleSessionToCSV
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.material.icons.filled.SwapHoriz
 
 
 // Модель для уведомлений
@@ -110,52 +113,156 @@ fun App() {
     var currentScreen by remember { mutableStateOf(AppScreen.ORU_SELECTION) }
     var selectedOru by remember { mutableStateOf<Oru?>(null) }
     var selectedSession by remember { mutableStateOf<InspectionSession?>(null) }
+    var showInspectorSelection by remember { mutableStateOf(false) }
+
+    // Отслеживаем текущего дежурного
+    val currentInspector by produceState<Inspector?>(initialValue = null) {
+        value = InspectorManager.getCurrentInspector()
+    }
 
     MaterialTheme {
-        when (currentScreen) {
-            AppScreen.ORU_SELECTION -> OruSelectionScreen(
-                oruList = SubstationData.allOru,
-                onOruSelected = {
-                    selectedOru = it
-                    currentScreen = AppScreen.ORU_INSPECTION
-                },
-                onAbout = { currentScreen = AppScreen.ABOUT },
-                onHistory = { currentScreen = AppScreen.HISTORY }
-            )
-
-            AppScreen.HISTORY -> HistoryScreen(
-                onBack = { currentScreen = AppScreen.ORU_SELECTION },
-                onViewDetails = { session ->
-                    selectedSession = session
-                    currentScreen = AppScreen.INSPECTION_DETAILS
-                }
-            )
-
-            AppScreen.INSPECTION_DETAILS -> selectedSession?.let { session ->
-                InspectionDetailsScreen(
-                    session = session,
-                    onBack = { currentScreen = AppScreen.HISTORY }
+        Box(modifier = Modifier.fillMaxSize()) {
+            when (currentScreen) {
+                AppScreen.ORU_SELECTION -> OruSelectionScreen(
+                    oruList = SubstationData.allOru,
+                    onOruSelected = {
+                        selectedOru = it
+                        // Проверяем, выбран ли дежурный
+                        if (InspectorManager.getCurrentInspector() == null) {
+                            showInspectorSelection = true
+                        } else {
+                            currentScreen = AppScreen.ORU_INSPECTION
+                        }
+                    },
+                    onAbout = { currentScreen = AppScreen.ABOUT },
+                    onHistory = { currentScreen = AppScreen.HISTORY }
                 )
-            } ?: run {
-                currentScreen = AppScreen.HISTORY
-                Box {}
-            }
 
-            AppScreen.ORU_INSPECTION -> selectedOru?.let { oru ->
-                OruInspectionScreen(
-                    oru = oru,
+                AppScreen.HISTORY -> HistoryScreen(
+                    onBack = { currentScreen = AppScreen.ORU_SELECTION },
+                    onViewDetails = { session ->
+                        selectedSession = session
+                        currentScreen = AppScreen.INSPECTION_DETAILS
+                    }
+                )
+
+                AppScreen.INSPECTION_DETAILS -> selectedSession?.let { session ->
+                    InspectionDetailsScreen(
+                        session = session,
+                        onBack = { currentScreen = AppScreen.HISTORY }
+                    )
+                } ?: run {
+                    currentScreen = AppScreen.HISTORY
+                    Box {}
+                }
+
+                AppScreen.ORU_INSPECTION -> selectedOru?.let { oru ->
+                    OruInspectionScreen(
+                        oru = oru,
+                        onBack = { currentScreen = AppScreen.ORU_SELECTION }
+                    )
+                } ?: run {
+                    currentScreen = AppScreen.ORU_SELECTION
+                    Box {}
+                }
+
+                AppScreen.ABOUT -> AboutScreen(
                     onBack = { currentScreen = AppScreen.ORU_SELECTION }
                 )
-            } ?: run {
-                currentScreen = AppScreen.ORU_SELECTION
-                Box {}
+                AppScreen.INSPECTOR_SELECTION -> { /* Можно оставить пустым или добавить заглушку */ }
             }
 
-            AppScreen.ABOUT -> AboutScreen(
-                onBack = { currentScreen = AppScreen.ORU_SELECTION }
-            )
+            // Отображаем дежурного в верхнем правом углу (кроме экрана выбора дежурного)
+            if (currentScreen != AppScreen.INSPECTOR_SELECTION && !showInspectorSelection) {
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.TopEnd)
+                        .padding(16.dp)
+                ) {
+                    InspectorBadge(
+                        inspector = currentInspector,
+                        onChangeClick = { showInspectorSelection = true }
+                    )
+                }
+            }
 
-            // Убираем AppScreen.EXPORT - он больше не нужен
+
+
+            // Экран выбора дежурного (поверх основного контента)
+            if (showInspectorSelection) {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colors.background.copy(alpha = 0.9f)
+                ) {
+                    InspectorSelectionScreen(
+                        onInspectorSelected = { inspector ->
+                            InspectorManager.setCurrentInspector(inspector)
+                            showInspectorSelection = false
+                            currentScreen = AppScreen.ORU_INSPECTION
+                            // Здесь автоматически обновится currentInspector через produceState
+                        },
+                        onBack = {
+                            showInspectorSelection = false
+                            currentScreen = AppScreen.ORU_SELECTION
+                        }
+                    )
+                }
+            }
+
+            NotificationToast()
+        }
+    }
+}
+
+@Composable
+fun InspectorBadge(
+    inspector: Inspector?,
+    onChangeClick: () -> Unit
+) {
+    Card(
+        elevation = 4.dp,
+        backgroundColor = MaterialTheme.colors.primary.copy(alpha = 0.1f)
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(8.dp)
+        ) {
+            if (inspector != null) {
+                Column(
+                    modifier = Modifier.padding(end = 8.dp)
+                ) {
+                    Text(
+                        text = inspector.name,
+                        style = MaterialTheme.typography.body2,
+                        fontWeight = FontWeight.Bold
+                    )
+                    if (inspector.position.isNotBlank()) {
+                        Text(
+                            text = inspector.position,
+                            style = MaterialTheme.typography.caption,
+                            color = MaterialTheme.colors.onSurface.copy(alpha = 0.7f)
+                        )
+                    }
+                }
+            } else {
+                Text(
+                    text = "Дежурный не выбран",
+                    style = MaterialTheme.typography.body2,
+                    color = MaterialTheme.colors.error,
+                    modifier = Modifier.padding(end = 8.dp)
+                )
+            }
+
+            IconButton(
+                onClick = onChangeClick,
+                modifier = Modifier.size(24.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.SwapHoriz, // Или другую иконку для смены
+                    contentDescription = "Сменить дежурного",
+                    tint = MaterialTheme.colors.primary
+                )
+            }
         }
     }
 }
@@ -225,17 +332,53 @@ fun OruInspectionScreen(oru: Oru, onBack: () -> Unit) {
     var showSaveDialog by remember { mutableStateOf(false) }
     var showInspectorDialog by remember { mutableStateOf(false) }
 
+    // Загрузка существующего черновика при открытии экрана
+    LaunchedEffect(oru) {
+        val drafts = InspectionRepository.getSessions()
+            .filter { it.oru.voltage == oru.voltage && it.isDraft }
+            .sortedByDescending { it.dateTime } // Сортируем по дате (новейший первый)
+
+        if (drafts.isNotEmpty()) {
+            val draft = drafts.first() // Берем самый свежий черновик
+            val loadedData = mutableMapOf<String, String>()
+
+            draft.results.forEach { result ->
+                result.parameters.forEach { (paramName, value) ->
+                    val key = "${result.equipment.id}_$paramName"
+                    loadedData[key] = value
+                }
+            }
+
+            inspectionData = loadedData
+            NotificationManager.showNotification("Загружен черновик", NotificationType.INFO)
+        }
+    }
+
+    // Автосохранение черновика при изменении данных
+    LaunchedEffect(inspectionData) {
+        if (inspectionData.isNotEmpty() && inspectionData.values.any { it.isNotBlank() }) {
+            saveDraftAutoSave(oru, inspectionData)
+        }
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        // Шапка
+        // Шапка с кнопкой назад
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxWidth()
         ) {
-            IconButton(onClick = onBack) {
+            IconButton(onClick = {
+                // При выходе сохраняем черновик, если есть данные
+                if (inspectionData.isNotEmpty() && inspectionData.values.any { it.isNotBlank() }) {
+                    saveDraftAutoSave(oru, inspectionData)
+                    NotificationManager.showNotification("Черновик сохранен", NotificationType.INFO)
+                }
+                onBack()
+            }) {
                 Icon(Icons.Filled.ArrowBack, "Назад")
             }
             Text(
@@ -243,11 +386,21 @@ fun OruInspectionScreen(oru: Oru, onBack: () -> Unit) {
                 style = MaterialTheme.typography.h6,
                 modifier = Modifier.weight(1f)
             )
+
+            // Индикатор черновика
+            if (inspectionData.isNotEmpty() && inspectionData.values.any { it.isNotBlank() }) {
+                Text(
+                    "Черновик",
+                    color = MaterialTheme.colors.secondary,
+                    style = MaterialTheme.typography.caption,
+                    modifier = Modifier.padding(horizontal = 8.dp)
+                )
+            }
         }
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Основной контент - ВОССТАНАВЛИВАЕМ ЭТУ ЧАСТЬ
+        // Основной контент
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -315,17 +468,31 @@ fun OruInspectionScreen(oru: Oru, onBack: () -> Unit) {
         )
     }
 
-    if (showInspectorDialog) {
-        InspectorNameDialog(
-            onConfirm = { inspectorName ->
-                saveInspectionResults(oru, inspectionData, inspectorName)
-                showInspectorDialog = false
-                onBack()
-                NotificationManager.showNotification("✅ Осмотр сохранен")
+    if (showSaveDialog) {
+        AlertDialog(
+            onDismissRequest = { showSaveDialog = false },
+            title = { Text("Завершение осмотра") },
+            text = { Text("Сохранить результаты осмотра?") },
+            confirmButton = {
+                Button(onClick = {
+                    showSaveDialog = false
+                    // Сохраняем результаты сразу, используя текущего инспектора
+                    val currentInspector = InspectorManager.getCurrentInspector()
+                    if (currentInspector != null) {
+                        saveInspectionResults(oru, inspectionData, false)
+                        onBack()
+                        NotificationManager.showNotification("✅ Осмотр сохранен")
+                    } else {
+                        NotificationManager.showNotification("❌ Не выбран дежурный", NotificationType.ERROR)
+                    }
+                }) {
+                    Text("Сохранить")
+                }
             },
-            onDismiss = {
-                showInspectorDialog = false
-                NotificationManager.showNotification("❌ Осмотр отменен", NotificationType.ERROR)
+            dismissButton = {
+                Button(onClick = { showSaveDialog = false }) {
+                    Text("Отмена")
+                }
             }
         )
     }
@@ -349,7 +516,7 @@ fun SaveInspectionDialog(onConfirm: () -> Unit, onDismiss: () -> Unit) {
     )
 }
 
-private fun saveInspectionResults(oru: Oru, data: Map<String, String>, inspectorName: String) {
+private fun saveInspectionResults(oru: Oru, data: Map<String, String>, isDraft: Boolean = false) {
     val results = mutableListOf<InspectionResult>()
 
     oru.equipments.forEach { equipment ->
@@ -361,9 +528,33 @@ private fun saveInspectionResults(oru: Oru, data: Map<String, String>, inspector
         results.add(InspectionResult(equipment, equipmentParams))
     }
 
-    val session = InspectionSession(oru = oru, results = results, isCompleted = true, inspectorName = inspectorName)
+    val currentInspector = InspectorManager.getCurrentInspector()
+
+    if (!isDraft && currentInspector == null) {
+        NotificationManager.showNotification("Не выбран дежурный", NotificationType.ERROR)
+        return
+    }
+
+    // Если это завершенный осмотр, удаляем черновики для этого ОРУ
+    if (!isDraft) {
+        val existingDrafts = InspectionRepository.getSessions()
+            .filter { it.oru.voltage == oru.voltage && it.isDraft }
+
+        existingDrafts.forEach { draft ->
+            InspectionRepository.deleteSession(draft.id)
+        }
+    }
+
+    val session = InspectionSession(
+        oru = oru,
+        results = results,
+        isCompleted = !isDraft,
+        inspectorId = if (isDraft) "" else currentInspector?.id ?: "", // Для черновика оставляем пустым
+        isDraft = isDraft
+    )
     InspectionRepository.saveSession(session)
 }
+
 
 // Новый компактный компонент для зданий
 @Composable
@@ -907,7 +1098,7 @@ fun AboutScreen(onBack: () -> Unit) {
             .verticalScroll(rememberScrollState())
     ) {
         IconButton(onClick = onBack) {
-            Icon(Icons.Filled.ArrowBack, "Назад")
+            Icon(Icons.AutoMirrored.Filled.ArrowBack, "Назад")
         }
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -950,7 +1141,7 @@ fun HistoryScreen(
     Box(modifier = Modifier.fillMaxSize()) {
         Column(Modifier.fillMaxSize().padding(16.dp)) {
             IconButton(onClick = onBack) {
-                Icon(Icons.Filled.ArrowBack, "Назад")
+                Icon(Icons.AutoMirrored.Filled.ArrowBack, "Назад")
             }
 
             Text("История осмотров", style = MaterialTheme.typography.h4)
@@ -1068,13 +1259,16 @@ fun HistoryItem(
                         "Оборудование: ${session.results.size}",
                         style = MaterialTheme.typography.body2
                     )
-                    if (session.isCompleted) {
-                        Text(
-                            "Завершено",
-                            color = MaterialTheme.colors.primary,
-                            style = MaterialTheme.typography.caption
-                        )
-                    }
+                    // Отображаем статус вместо простого "Завершено"
+                    Text(
+                        session.status,
+                        color = when {
+                            session.isDraft -> MaterialTheme.colors.secondary
+                            session.isCompleted -> MaterialTheme.colors.primary
+                            else -> MaterialTheme.colors.onSurface.copy(alpha = 0.7f)
+                        },
+                        style = MaterialTheme.typography.caption
+                    )
                 }
 
                 IconButton(
@@ -1113,6 +1307,18 @@ fun HistoryItem(
             ) {
                 Text("Экспортировать в CSV")
             }
+
+            // Дополнительное действие для черновиков
+            if (session.isDraft) {
+                DropdownMenuItem(
+                    onClick = {
+                        showContextMenu = false
+                        // Здесь можно добавить функционал продолжения редактирования черновика
+                    }
+                ) {
+                    Text("Продолжить редактирование")
+                }
+            }
         }
     }
 }
@@ -1128,7 +1334,7 @@ fun InspectionDetailsScreen(session: InspectionSession, onBack: () -> Unit) {
         // Шапка
         Row(verticalAlignment = Alignment.CenterVertically) {
             IconButton(onClick = onBack) {
-                Icon(Icons.Filled.ArrowBack, "Назад")
+                Icon(Icons.AutoMirrored.Filled.ArrowBack, "Назад")
             }
             Text(
                 "Детали осмотра: ${session.oru.name}",
@@ -1193,7 +1399,7 @@ fun ExportScreen(onBack: () -> Unit) {
         // Шапка
         Row(verticalAlignment = Alignment.CenterVertically) {
             IconButton(onClick = onBack) {
-                Icon(Icons.Filled.ArrowBack, "Назад")
+                Icon(Icons.AutoMirrored.Filled.ArrowBack, "Назад")
             }
             Text("Экспорт данных", style = MaterialTheme.typography.h4)
         }
@@ -1221,7 +1427,7 @@ fun ExportScreen(onBack: () -> Unit) {
 
         Spacer(Modifier.height(16.dp))
 
-        // Информация о экспорте
+        // Информация об экспорте
         if (exportPath.isNotBlank()) {
             Card(
                 modifier = Modifier.fillMaxWidth(),
@@ -1235,51 +1441,6 @@ fun ExportScreen(onBack: () -> Unit) {
             }
         }
     }
-}
-
-@Composable
-fun InspectorNameDialog(
-    onConfirm: (String) -> Unit,
-    onDismiss: () -> Unit
-) {
-    var inspectorName by remember { mutableStateOf("") }
-
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        title = { Text("Фамилия дежурного") },
-        text = {
-            Column {
-                Text("Введите фамилию дежурного, выполнившего осмотр:")
-                Spacer(modifier = Modifier.height(8.dp))
-                OutlinedTextField(
-                    value = inspectorName,
-                    onValueChange = { inspectorName = it },
-                    label = { Text("Фамилия дежурного") },
-                    modifier = Modifier.fillMaxWidth(),
-                    singleLine = true
-                )
-            }
-        },
-        confirmButton = {
-            Button(
-                onClick = {
-                    if (inspectorName.isNotBlank()) {
-                        onConfirm(inspectorName)
-                    } else {
-                        NotificationManager.showNotification("⚠️ Введите фамилию дежурного", NotificationType.ERROR)
-                    }
-                },
-                enabled = inspectorName.isNotBlank()
-            ) {
-                Text("Сохранить")
-            }
-        },
-        dismissButton = {
-            Button(onClick = onDismiss) {
-                Text("Отмена")
-            }
-        }
-    )
 }
 
 fun exportToCSV(fileName: String = "осмотры_подстанции_${System.currentTimeMillis()}.csv"): String {
@@ -1352,3 +1513,149 @@ fun exportToCSV(fileName: String = "осмотры_подстанции_${System
         throw e
     }
 }
+
+// Добавьте в Main.kt новый экран
+@Composable
+fun InspectorSelectionScreen(
+    onInspectorSelected: (Inspector) -> Unit,
+    onBack: () -> Unit
+) {
+    var inspectors by remember { mutableStateOf(InspectorManager.getInspectors()) }
+    var showAddDialog by remember { mutableStateOf(false) }
+    var newInspectorName by remember { mutableStateOf("") }
+    var newInspectorPosition by remember { mutableStateOf("") }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        // Шапка
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            IconButton(onClick = onBack) {
+                Icon(Icons.AutoMirrored.Filled.ArrowBack, "Назад")
+            }
+            Text("Выбор дежурного", style = MaterialTheme.typography.h4)
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        if (inspectors.isEmpty()) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .weight(1f),
+                contentAlignment = Alignment.Center
+            ) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text("Нет созданных дежурных", style = MaterialTheme.typography.h6)
+                    Text("Добавьте первого дежурного", style = MaterialTheme.typography.body2)
+                }
+            }
+        } else {
+            LazyColumn(modifier = Modifier.weight(1f)) {
+                items(inspectors) { inspector ->
+                    Card(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 4.dp)
+                            .clickable { onInspectorSelected(inspector) },
+                        elevation = 2.dp
+                    ) {
+                        Column(modifier = Modifier.padding(16.dp)) {
+                            Text(inspector.name, style = MaterialTheme.typography.h6)
+                            if (inspector.position.isNotBlank()) {
+                                Text(inspector.position, style = MaterialTheme.typography.body2)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        Button(
+            onClick = { showAddDialog = true },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Добавить нового дежурного")
+        }
+    }
+
+    // Диалог добавления нового дежурного
+    if (showAddDialog) {
+        AlertDialog(
+            onDismissRequest = { showAddDialog = false },
+            title = { Text("Добавить дежурного") },
+            text = {
+                Column {
+                    OutlinedTextField(
+                        value = newInspectorName,
+                        onValueChange = { newInspectorName = it },
+                        label = { Text("Фамилия и инициалы") },
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    OutlinedTextField(
+                        value = newInspectorPosition,
+                        onValueChange = { newInspectorPosition = it },
+                        label = { Text("Должность (необязательно)") },
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+            },
+            confirmButton = {
+                Button(
+                    onClick = {
+                        if (newInspectorName.isNotBlank()) {
+                            val inspector = Inspector(
+                                name = newInspectorName,
+                                position = newInspectorPosition
+                            )
+                            if (InspectorManager.addInspector(inspector)) {
+                                inspectors = InspectorManager.getInspectors()
+                                showAddDialog = false
+                                newInspectorName = ""
+                                newInspectorPosition = ""
+                            } else {
+                                NotificationManager.showNotification("Дежурный с таким именем уже существует", NotificationType.ERROR)
+                            }
+                        }
+                    },
+                    enabled = newInspectorName.isNotBlank()
+                ) {
+                    Text("Добавить")
+                }
+            },
+            dismissButton = {
+                Button(onClick = { showAddDialog = false }) {
+                    Text("Отмена")
+                }
+            }
+        )
+    }
+}
+
+private fun saveDraftAutoSave(oru: Oru, data: Map<String, String>) {
+    val results = mutableListOf<InspectionResult>()
+
+    oru.equipments.forEach { equipment ->
+        val equipmentParams = mutableMapOf<String, String>()
+        equipment.parameters.forEach { param ->
+            val key = "${equipment.id}_${param.name}"
+            equipmentParams[param.name] = data[key] ?: ""
+        }
+        results.add(InspectionResult(equipment, equipmentParams))
+    }
+
+    // НЕ удаляем существующие черновики при автосохранении
+    val session = InspectionSession(
+        oru = oru,
+        results = results,
+        isCompleted = false,
+        inspectorId = "", // Для черновика оставляем пустым
+        isDraft = true
+    )
+    InspectionRepository.saveSession(session)
+}
+
+

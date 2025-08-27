@@ -44,6 +44,13 @@ data class InspectionParameter(
 )
 
 @Serializable
+data class Inspector(
+    val id: String = UUID.randomUUID().toString(),
+    val name: String,
+    val position: String = "" // Должность (опционально)
+)
+
+@Serializable
 data class InspectionResult(
     val equipment: Equipment,
     val parameters: Map<String, String>, // key: paramName, value: userInput
@@ -52,6 +59,7 @@ data class InspectionResult(
     val comments: String = ""
 )
 
+// В Models.kt обновите InspectionSession:
 @Serializable
 data class InspectionSession(
     val id: String = UUID.randomUUID().toString(),
@@ -60,10 +68,22 @@ data class InspectionSession(
     @Serializable(with = LocalDateTimeSerializer::class)
     val dateTime: LocalDateTime = LocalDateTime.now(),
     val isCompleted: Boolean = false,
-    val inspectorName: String = ""
+    val inspectorId: String = "", // Используем ID вместо имени
+    val isDraft: Boolean = false
 ) {
+    // Вычисляемое свойство для получения имени дежурного
+    val inspectorName: String
+        get() = if (inspectorId.isBlank()) "Черновик" else InspectorManager.getInspectorById(inspectorId)?.name ?: ""
+
     val dateTimeString: String
         get() = dateTime.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"))
+
+    val status: String
+        get() = when {
+            isDraft -> "Черновик"
+            isCompleted -> "Завершено"
+            else -> "В процессе"
+        }
 }
 
 enum class AppScreen {
@@ -72,7 +92,8 @@ enum class AppScreen {
     ABOUT,
     HISTORY,
     INSPECTION_DETAILS,
-    //EXPORT,
+    INSPECTOR_SELECTION,
+
 }
 
 
@@ -1139,6 +1160,92 @@ object SubstationData {
         }
 
         return result
+    }
+}
+
+// В Models.kt замените InspectorManager на эту версию:
+object InspectorManager {
+    private const val PREF_CURRENT_INSPECTOR = "current_inspector"
+    private const val PREF_INSPECTORS = "inspectors_list"
+
+    fun getInspectors(): List<Inspector> {
+        return try {
+            val json = DesktopPreferencesStorage.getString(PREF_INSPECTORS) ?: "[]"
+            Json.decodeFromString<List<Inspector>>(json)
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
+
+    fun saveInspectors(inspectors: List<Inspector>) {
+        val json = Json.encodeToString(inspectors)
+        DesktopPreferencesStorage.putString(PREF_INSPECTORS, json)
+    }
+
+    fun getCurrentInspector(): Inspector? {
+        return try {
+            val inspectorId = DesktopPreferencesStorage.getString(PREF_CURRENT_INSPECTOR)
+            inspectorId?.let { id ->
+                getInspectors().find { it.id == id }
+            }
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    fun setCurrentInspector(inspector: Inspector) {
+        DesktopPreferencesStorage.putString(PREF_CURRENT_INSPECTOR, inspector.id)
+    }
+
+    fun addInspector(inspector: Inspector): Boolean {
+        val currentInspectors = getInspectors().toMutableList()
+        if (currentInspectors.any { it.name.equals(inspector.name, ignoreCase = true) }) {
+            return false
+        }
+        currentInspectors.add(inspector)
+        saveInspectors(currentInspectors)
+        return true
+    }
+
+    fun updateInspector(updatedInspector: Inspector): Boolean {
+        val currentInspectors = getInspectors().toMutableList()
+        val index = currentInspectors.indexOfFirst { it.id == updatedInspector.id }
+        if (index == -1) return false
+
+        val hasNameConflict = currentInspectors.any {
+            it.id != updatedInspector.id &&
+                    it.name.equals(updatedInspector.name, ignoreCase = true)
+        }
+        if (hasNameConflict) return false
+
+        currentInspectors[index] = updatedInspector
+        saveInspectors(currentInspectors)
+        return true
+    }
+
+    fun removeInspector(inspector: Inspector): Boolean {
+        val currentInspectors = getInspectors().toMutableList()
+        val removed = currentInspectors.removeAll { it.id == inspector.id }
+
+        if (removed) {
+            saveInspectors(currentInspectors)
+            if (getCurrentInspector()?.id == inspector.id) {
+                clearCurrentInspector()
+            }
+        }
+        return removed
+    }
+
+    fun clearCurrentInspector() {
+        DesktopPreferencesStorage.remove(PREF_CURRENT_INSPECTOR)
+    }
+
+    fun hasInspectors(): Boolean {
+        return getInspectors().isNotEmpty()
+    }
+
+    fun getInspectorById(id: String): Inspector? {
+        return getInspectors().find { it.id == id }
     }
 }
 
