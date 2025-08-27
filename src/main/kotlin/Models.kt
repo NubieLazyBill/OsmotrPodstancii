@@ -6,6 +6,11 @@ import kotlinx.serialization.json.Json
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.UUID
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 @Serializable
 enum class EquipmentType {
@@ -50,15 +55,15 @@ data class InspectionResult(
 @Serializable
 data class InspectionSession(
     val id: String = UUID.randomUUID().toString(),
-    val dateTimeString: String = LocalDateTime.now()
-        .format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")),
     val oru: Oru,
     val results: List<InspectionResult>,
-    val isCompleted: Boolean = false
+    @Serializable(with = LocalDateTimeSerializer::class)
+    val dateTime: LocalDateTime = LocalDateTime.now(),
+    val isCompleted: Boolean = false,
+    val inspectorName: String = ""
 ) {
-    // Добавим computed property для удобства
-    val dateTime: LocalDateTime
-        get() = LocalDateTime.parse(dateTimeString, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"))
+    val dateTimeString: String
+        get() = dateTime.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"))
 }
 
 enum class AppScreen {
@@ -1134,5 +1139,17 @@ object SubstationData {
         }
 
         return result
+    }
+}
+
+object LocalDateTimeSerializer : KSerializer<LocalDateTime> {
+    override val descriptor = PrimitiveSerialDescriptor("LocalDateTime", PrimitiveKind.STRING)
+
+    override fun serialize(encoder: Encoder, value: LocalDateTime) {
+        encoder.encodeString(value.toString())
+    }
+
+    override fun deserialize(decoder: Decoder): LocalDateTime {
+        return LocalDateTime.parse(decoder.decodeString())
     }
 }

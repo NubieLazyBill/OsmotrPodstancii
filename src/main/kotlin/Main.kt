@@ -29,6 +29,8 @@ import java.time.format.DateTimeFormatter
 import java.util.UUID
 import androidx.compose.ui.graphics.Color
 import org.example.exportSingleSessionToCSV
+import org.example.exportToCSV
+import org.example.exportSingleSessionToCSV
 
 
 // Модель для уведомлений
@@ -221,6 +223,7 @@ fun OruInspectionScreen(oru: Oru, onBack: () -> Unit) {
     var inspectionData by remember { mutableStateOf<Map<String, String>>(emptyMap()) }
     val scrollState = rememberScrollState()
     var showSaveDialog by remember { mutableStateOf(false) }
+    var showInspectorDialog by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -244,7 +247,7 @@ fun OruInspectionScreen(oru: Oru, onBack: () -> Unit) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Основной контент
+        // Основной контент - ВОССТАНАВЛИВАЕМ ЭТУ ЧАСТЬ
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -271,7 +274,7 @@ fun OruInspectionScreen(oru: Oru, onBack: () -> Unit) {
                             inspectionData = inspectionData + (key to value)
                         }
                     )
-                    "0" -> BuildingsInspectionLayout( // Новый экран для зданий
+                    "0" -> BuildingsInspectionLayout(
                         oru = oru,
                         inspectionData = inspectionData,
                         onParamChange = { key, value ->
@@ -305,15 +308,28 @@ fun OruInspectionScreen(oru: Oru, onBack: () -> Unit) {
     if (showSaveDialog) {
         SaveInspectionDialog(
             onConfirm = {
-                saveInspectionResults(oru, inspectionData)
                 showSaveDialog = false
-                onBack()
+                showInspectorDialog = true
             },
             onDismiss = { showSaveDialog = false }
         )
     }
-}
 
+    if (showInspectorDialog) {
+        InspectorNameDialog(
+            onConfirm = { inspectorName ->
+                saveInspectionResults(oru, inspectionData, inspectorName)
+                showInspectorDialog = false
+                onBack()
+                NotificationManager.showNotification("✅ Осмотр сохранен")
+            },
+            onDismiss = {
+                showInspectorDialog = false
+                NotificationManager.showNotification("❌ Осмотр отменен", NotificationType.ERROR)
+            }
+        )
+    }
+}
 @Composable
 fun SaveInspectionDialog(onConfirm: () -> Unit, onDismiss: () -> Unit) {
     AlertDialog(
@@ -333,7 +349,7 @@ fun SaveInspectionDialog(onConfirm: () -> Unit, onDismiss: () -> Unit) {
     )
 }
 
-private fun saveInspectionResults(oru: Oru, data: Map<String, String>) {
+private fun saveInspectionResults(oru: Oru, data: Map<String, String>, inspectorName: String) {
     val results = mutableListOf<InspectionResult>()
 
     oru.equipments.forEach { equipment ->
@@ -345,7 +361,7 @@ private fun saveInspectionResults(oru: Oru, data: Map<String, String>) {
         results.add(InspectionResult(equipment, equipmentParams))
     }
 
-    val session = InspectionSession(oru = oru, results = results, isCompleted = true)
+    val session = InspectionSession(oru = oru, results = results, isCompleted = true, inspectorName = inspectorName)
     InspectionRepository.saveSession(session)
 }
 
@@ -928,7 +944,7 @@ fun HistoryScreen(
     onBack: () -> Unit,
     onViewDetails: (InspectionSession) -> Unit
 ) {
-    val sessions by remember { mutableStateOf(InspectionRepository.getSessions()) }
+    val sessions = remember { mutableStateOf(InspectionRepository.getSessions().sortedByDescending { it.dateTime }) }
     var showDeleteDialog by remember { mutableStateOf<String?>(null) }
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -957,7 +973,7 @@ fun HistoryScreen(
                 Text("Экспортировать все данные в CSV")
             }
 
-            if (sessions.isEmpty()) {
+            if (sessions.value.isEmpty()) {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
@@ -968,7 +984,7 @@ fun HistoryScreen(
                 }
             } else {
                 LazyColumn(modifier = Modifier.weight(1f)) {
-                    items(sessions) { session ->
+                    items(sessions.value) { session ->
                         HistoryItem(
                             session = session,
                             onViewDetails = onViewDetails,
@@ -979,7 +995,6 @@ fun HistoryScreen(
             }
         }
 
-        // Уведомления - ДОБАВЬТЕ ЭТУ СТРОЧКУ
         NotificationToast()
     }
 
@@ -993,6 +1008,7 @@ fun HistoryScreen(
                 Button(
                     onClick = {
                         InspectionRepository.deleteSession(sessionId)
+                        sessions.value = InspectionRepository.getSessions().sortedByDescending { it.dateTime }
                         showDeleteDialog = null
                         NotificationManager.showNotification("🗑️ Осмотр удален")
                     }
@@ -1042,6 +1058,11 @@ fun HistoryItem(
                     Text(
                         "Дата: ${session.dateTimeString}",
                         style = MaterialTheme.typography.body2
+                    )
+                    Text(
+                        "Дежурный: ${session.inspectorName}",
+                        style = MaterialTheme.typography.body2,
+                        color = MaterialTheme.colors.secondary
                     )
                     Text(
                         "Оборудование: ${session.results.size}",
@@ -1119,8 +1140,13 @@ fun InspectionDetailsScreen(session: InspectionSession, onBack: () -> Unit) {
 
         // Информация о сессии
         Text(
-            "Дата и время: ${session.dateTimeString}", // ИЗМЕНИЛИ ЗДЕСЬ
+            "Дата и время: ${session.dateTimeString}",
             style = MaterialTheme.typography.body1
+        )
+        Text(
+            "Дежурный: ${session.inspectorName}",
+            style = MaterialTheme.typography.body1,
+            color = MaterialTheme.colors.secondary
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -1211,6 +1237,51 @@ fun ExportScreen(onBack: () -> Unit) {
     }
 }
 
+@Composable
+fun InspectorNameDialog(
+    onConfirm: (String) -> Unit,
+    onDismiss: () -> Unit
+) {
+    var inspectorName by remember { mutableStateOf("") }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Фамилия дежурного") },
+        text = {
+            Column {
+                Text("Введите фамилию дежурного, выполнившего осмотр:")
+                Spacer(modifier = Modifier.height(8.dp))
+                OutlinedTextField(
+                    value = inspectorName,
+                    onValueChange = { inspectorName = it },
+                    label = { Text("Фамилия дежурного") },
+                    modifier = Modifier.fillMaxWidth(),
+                    singleLine = true
+                )
+            }
+        },
+        confirmButton = {
+            Button(
+                onClick = {
+                    if (inspectorName.isNotBlank()) {
+                        onConfirm(inspectorName)
+                    } else {
+                        NotificationManager.showNotification("⚠️ Введите фамилию дежурного", NotificationType.ERROR)
+                    }
+                },
+                enabled = inspectorName.isNotBlank()
+            ) {
+                Text("Сохранить")
+            }
+        },
+        dismissButton = {
+            Button(onClick = onDismiss) {
+                Text("Отмена")
+            }
+        }
+    )
+}
+
 fun exportToCSV(fileName: String = "осмотры_подстанции_${System.currentTimeMillis()}.csv"): String {
     try {
         val file = File(fileName)
@@ -1220,8 +1291,8 @@ fun exportToCSV(fileName: String = "осмотры_подстанции_${System
         // Добавляем BOM (Byte Order Mark) для UTF-8
         writer.write("\uFEFF")
 
-        // Заголовок CSV
-        writer.write("Дата;Время;ОРУ;Напряжение;Оборудование;Тип оборудования;Параметр;Значение;Норма;Статус;Комментарии")
+        // Заголовок CSV с добавлением поля "Дежурный"
+        writer.write("Дата;Время;ОРУ;Напряжение;Дежурный;Оборудование;Тип оборудования;Параметр;Значение;Норма;Статус;Комментарии")
         writer.newLine()
 
         InspectionRepository.getSessions().forEach { session ->
@@ -1261,8 +1332,9 @@ fun exportToCSV(fileName: String = "осмотры_подстанции_${System
                     val date = dateTimeParts.getOrElse(0) { "" }
                     val time = dateTimeParts.getOrElse(1) { "" }
 
+                    // ВСТАВИТЬ ЗДЕСЬ - это заменяет старую строку writer.write
                     writer.write(
-                        "$date;$time;${session.oru.name};${session.oru.voltage};" +
+                        "$date;$time;${session.oru.name};${session.oru.voltage};${session.inspectorName};" +
                                 "${result.equipment.name};${result.equipment.type};" +
                                 "$paramName;$value;$normalValue;$status;${result.comments}"
                     )

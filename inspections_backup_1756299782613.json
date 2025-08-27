@@ -1,0 +1,3706 @@
+[
+    {
+        "id": "497e4bd1-4820-4427-a7c2-81d0e43157f1",
+        "dateTimeString": "27.08.2025 12:04",
+        "oru": {
+            "voltage": "500",
+            "name": "ОРУ-500",
+            "equipments": [
+                {
+                    "id": "В-500 Р-500 2С",
+                    "name": "В-500 Р-500 2С",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Уровень продувки ф.А I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.А II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        }
+                    ]
+                },
+                {
+                    "id": "В-500 ВШТ-31",
+                    "name": "В-500 ВШТ-31",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Давление элегаза ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Давление элегаза ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Давление элегаза ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "ТТ-500 ВШТ-31",
+                    "name": "ТТ-500 ВШТ-31",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "В-500 ВЛТ-30",
+                    "name": "В-500 ВЛТ-30",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Давление элегаза ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Давление элегаза ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Давление элегаза ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "ТТ-500 ВЛТ-30",
+                    "name": "ТТ-500 ВЛТ-30",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "В-500 ВШЛ-32",
+                    "name": "В-500 ВШЛ-32",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Уровень продувки ф.А I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.А II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        }
+                    ]
+                },
+                {
+                    "id": "ТТ-500 ВШЛ-32",
+                    "name": "ТТ-500 ВШЛ-32",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "В-500 ВШЛ-21",
+                    "name": "В-500 ВШЛ-21",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Уровень продувки ф.А I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.А II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        }
+                    ]
+                },
+                {
+                    "id": "ТТ-500 ВШЛ-21",
+                    "name": "ТТ-500 ВШЛ-21",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "В-500 ВШТ-22",
+                    "name": "В-500 ВШТ-22",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Уровень продувки ф.А I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.А II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        }
+                    ]
+                },
+                {
+                    "id": "ТТ-500 ВШТ-22",
+                    "name": "ТТ-500 ВШТ-22",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "В-500 ВЛТ-20",
+                    "name": "В-500 ВЛТ-20",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Уровень продувки ф.А I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.А II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        }
+                    ]
+                },
+                {
+                    "id": "ТТ-500 ВЛТ-20",
+                    "name": "ТТ-500 ВЛТ-20",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "В-500 ВШТ-11",
+                    "name": "В-500 ВШТ-11",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Уровень продувки ф.А I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.А II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        }
+                    ]
+                },
+                {
+                    "id": "ТТ-500 ВШТ-11",
+                    "name": "ТТ-500 ВШТ-11",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "В-500 ВШЛ-12",
+                    "name": "В-500 ВШЛ-12",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Уровень продувки ф.А I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.А II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        }
+                    ]
+                },
+                {
+                    "id": "ТТ-500 ВШЛ-12",
+                    "name": "ТТ-500 ВШЛ-12",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "ТТ-500 Трачуковская",
+                    "name": "ТТ-500 Трачуковская",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "1ТН-500 Трачуковская",
+                    "name": "1ТН-500 Трачуковская",
+                    "type": "VOLTAGE_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "2ТН-500 Трачуковская",
+                    "name": "2ТН-500 Трачуковская",
+                    "type": "VOLTAGE_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "ТН-500 Белозёрная",
+                    "name": "ТН-500 Белозёрная",
+                    "type": "VOLTAGE_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "1ТН-500",
+                    "name": "1ТН-500",
+                    "type": "VOLTAGE_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "2ТН-500",
+                    "name": "2ТН-500",
+                    "type": "VOLTAGE_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "ТН-500 СГРЭС-1",
+                    "name": "ТН-500 СГРЭС-1",
+                    "type": "VOLTAGE_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "air_pipes_500",
+                    "name": "Трубопроводы воздушной сети ОРУ-500",
+                    "type": "BUILDING",
+                    "parameters": [
+                        {
+                            "name": "Состояние трубопроводов",
+                            "unit": "",
+                            "normalValue": "исправно"
+                        },
+                        {
+                            "name": "Отсутствие утечек",
+                            "unit": "",
+                            "normalValue": "норма"
+                        },
+                        {
+                            "name": "Давление в системе",
+                            "unit": "кгс/см²",
+                            "normalValue": "норма"
+                        },
+                        {
+                            "name": "Примечание",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        "results": [
+            {
+                "equipment": {
+                    "id": "В-500 Р-500 2С",
+                    "name": "В-500 Р-500 2С",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Уровень продувки ф.А I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.А II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень продувки ф.А I эл.": "0,7",
+                    "Уровень продувки ф.А II эл.": "0,5",
+                    "Уровень продувки ф.В I эл.": "0,5",
+                    "Уровень продувки ф.В II эл.": "1",
+                    "Уровень продувки ф.С I эл.": "1",
+                    "Уровень продувки ф.С II эл.": "11"
+                },
+                "dateTime": "27.08.2025 12:04"
+            },
+            {
+                "equipment": {
+                    "id": "В-500 ВШТ-31",
+                    "name": "В-500 ВШТ-31",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Давление элегаза ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Давление элегаза ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Давление элегаза ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Давление элегаза ф.А": "1",
+                    "Давление элегаза ф.В": "1",
+                    "Давление элегаза ф.С": "1"
+                },
+                "dateTime": "27.08.2025 12:04"
+            },
+            {
+                "equipment": {
+                    "id": "ТТ-500 ВШТ-31",
+                    "name": "ТТ-500 ВШТ-31",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень масла ф.А": "1",
+                    "Уровень масла ф.В": "1",
+                    "Уровень масла ф.С": "1"
+                },
+                "dateTime": "27.08.2025 12:04"
+            },
+            {
+                "equipment": {
+                    "id": "В-500 ВЛТ-30",
+                    "name": "В-500 ВЛТ-30",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Давление элегаза ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Давление элегаза ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Давление элегаза ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Давление элегаза ф.А": "1",
+                    "Давление элегаза ф.В": "1",
+                    "Давление элегаза ф.С": "1"
+                },
+                "dateTime": "27.08.2025 12:04"
+            },
+            {
+                "equipment": {
+                    "id": "ТТ-500 ВЛТ-30",
+                    "name": "ТТ-500 ВЛТ-30",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень масла ф.А": "1",
+                    "Уровень масла ф.В": "0,7",
+                    "Уровень масла ф.С": "0,7"
+                },
+                "dateTime": "27.08.2025 12:04"
+            },
+            {
+                "equipment": {
+                    "id": "В-500 ВШЛ-32",
+                    "name": "В-500 ВШЛ-32",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Уровень продувки ф.А I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.А II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень продувки ф.А I эл.": "1",
+                    "Уровень продувки ф.А II эл.": "1",
+                    "Уровень продувки ф.В I эл.": "1",
+                    "Уровень продувки ф.В II эл.": "5",
+                    "Уровень продувки ф.С I эл.": "4",
+                    "Уровень продувки ф.С II эл.": "1"
+                },
+                "dateTime": "27.08.2025 12:04"
+            },
+            {
+                "equipment": {
+                    "id": "ТТ-500 ВШЛ-32",
+                    "name": "ТТ-500 ВШЛ-32",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень масла ф.А": "1",
+                    "Уровень масла ф.В": "8",
+                    "Уровень масла ф.С": "1"
+                },
+                "dateTime": "27.08.2025 12:04"
+            },
+            {
+                "equipment": {
+                    "id": "В-500 ВШЛ-21",
+                    "name": "В-500 ВШЛ-21",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Уровень продувки ф.А I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.А II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень продувки ф.А I эл.": "5",
+                    "Уровень продувки ф.А II эл.": "",
+                    "Уровень продувки ф.В I эл.": "",
+                    "Уровень продувки ф.В II эл.": "",
+                    "Уровень продувки ф.С I эл.": "",
+                    "Уровень продувки ф.С II эл.": ""
+                },
+                "dateTime": "27.08.2025 12:04"
+            },
+            {
+                "equipment": {
+                    "id": "ТТ-500 ВШЛ-21",
+                    "name": "ТТ-500 ВШЛ-21",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень масла ф.А": "",
+                    "Уровень масла ф.В": "",
+                    "Уровень масла ф.С": ""
+                },
+                "dateTime": "27.08.2025 12:04"
+            },
+            {
+                "equipment": {
+                    "id": "В-500 ВШТ-22",
+                    "name": "В-500 ВШТ-22",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Уровень продувки ф.А I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.А II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень продувки ф.А I эл.": "",
+                    "Уровень продувки ф.А II эл.": "",
+                    "Уровень продувки ф.В I эл.": "",
+                    "Уровень продувки ф.В II эл.": "",
+                    "Уровень продувки ф.С I эл.": "",
+                    "Уровень продувки ф.С II эл.": ""
+                },
+                "dateTime": "27.08.2025 12:04"
+            },
+            {
+                "equipment": {
+                    "id": "ТТ-500 ВШТ-22",
+                    "name": "ТТ-500 ВШТ-22",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень масла ф.А": "",
+                    "Уровень масла ф.В": "",
+                    "Уровень масла ф.С": ""
+                },
+                "dateTime": "27.08.2025 12:04"
+            },
+            {
+                "equipment": {
+                    "id": "В-500 ВЛТ-20",
+                    "name": "В-500 ВЛТ-20",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Уровень продувки ф.А I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.А II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень продувки ф.А I эл.": "",
+                    "Уровень продувки ф.А II эл.": "",
+                    "Уровень продувки ф.В I эл.": "",
+                    "Уровень продувки ф.В II эл.": "",
+                    "Уровень продувки ф.С I эл.": "",
+                    "Уровень продувки ф.С II эл.": ""
+                },
+                "dateTime": "27.08.2025 12:04"
+            },
+            {
+                "equipment": {
+                    "id": "ТТ-500 ВЛТ-20",
+                    "name": "ТТ-500 ВЛТ-20",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень масла ф.А": "",
+                    "Уровень масла ф.В": "",
+                    "Уровень масла ф.С": ""
+                },
+                "dateTime": "27.08.2025 12:04"
+            },
+            {
+                "equipment": {
+                    "id": "В-500 ВШТ-11",
+                    "name": "В-500 ВШТ-11",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Уровень продувки ф.А I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.А II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень продувки ф.А I эл.": "",
+                    "Уровень продувки ф.А II эл.": "",
+                    "Уровень продувки ф.В I эл.": "",
+                    "Уровень продувки ф.В II эл.": "",
+                    "Уровень продувки ф.С I эл.": "",
+                    "Уровень продувки ф.С II эл.": ""
+                },
+                "dateTime": "27.08.2025 12:04"
+            },
+            {
+                "equipment": {
+                    "id": "ТТ-500 ВШТ-11",
+                    "name": "ТТ-500 ВШТ-11",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень масла ф.А": "",
+                    "Уровень масла ф.В": "",
+                    "Уровень масла ф.С": ""
+                },
+                "dateTime": "27.08.2025 12:04"
+            },
+            {
+                "equipment": {
+                    "id": "В-500 ВШЛ-12",
+                    "name": "В-500 ВШЛ-12",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Уровень продувки ф.А I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.А II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень продувки ф.А I эл.": "",
+                    "Уровень продувки ф.А II эл.": "",
+                    "Уровень продувки ф.В I эл.": "",
+                    "Уровень продувки ф.В II эл.": "",
+                    "Уровень продувки ф.С I эл.": "",
+                    "Уровень продувки ф.С II эл.": ""
+                },
+                "dateTime": "27.08.2025 12:04"
+            },
+            {
+                "equipment": {
+                    "id": "ТТ-500 ВШЛ-12",
+                    "name": "ТТ-500 ВШЛ-12",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень масла ф.А": "",
+                    "Уровень масла ф.В": "",
+                    "Уровень масла ф.С": ""
+                },
+                "dateTime": "27.08.2025 12:04"
+            },
+            {
+                "equipment": {
+                    "id": "ТТ-500 Трачуковская",
+                    "name": "ТТ-500 Трачуковская",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень масла ф.А": "",
+                    "Уровень масла ф.В": "",
+                    "Уровень масла ф.С": ""
+                },
+                "dateTime": "27.08.2025 12:04"
+            },
+            {
+                "equipment": {
+                    "id": "1ТН-500 Трачуковская",
+                    "name": "1ТН-500 Трачуковская",
+                    "type": "VOLTAGE_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень масла ф.А": "",
+                    "Уровень масла ф.В": "",
+                    "Уровень масла ф.С": ""
+                },
+                "dateTime": "27.08.2025 12:04"
+            },
+            {
+                "equipment": {
+                    "id": "2ТН-500 Трачуковская",
+                    "name": "2ТН-500 Трачуковская",
+                    "type": "VOLTAGE_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень масла ф.А": "",
+                    "Уровень масла ф.В": "",
+                    "Уровень масла ф.С": ""
+                },
+                "dateTime": "27.08.2025 12:04"
+            },
+            {
+                "equipment": {
+                    "id": "ТН-500 Белозёрная",
+                    "name": "ТН-500 Белозёрная",
+                    "type": "VOLTAGE_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень масла ф.А": "",
+                    "Уровень масла ф.В": "",
+                    "Уровень масла ф.С": ""
+                },
+                "dateTime": "27.08.2025 12:04"
+            },
+            {
+                "equipment": {
+                    "id": "1ТН-500",
+                    "name": "1ТН-500",
+                    "type": "VOLTAGE_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень масла ф.А 1 каскад": "",
+                    "Уровень масла ф.А 2 каскад": "",
+                    "Уровень масла ф.А 3 каскад": "",
+                    "Уровень масла ф.А 4 каскад": "",
+                    "Уровень масла ф.В 1 каскад": "",
+                    "Уровень масла ф.В 2 каскад": "",
+                    "Уровень масла ф.В 3 каскад": "",
+                    "Уровень масла ф.В 4 каскад": "",
+                    "Уровень масла ф.С 1 каскад": "",
+                    "Уровень масла ф.С 2 каскад": "",
+                    "Уровень масла ф.С 3 каскад": "",
+                    "Уровень масла ф.С 4 каскад": ""
+                },
+                "dateTime": "27.08.2025 12:04"
+            },
+            {
+                "equipment": {
+                    "id": "2ТН-500",
+                    "name": "2ТН-500",
+                    "type": "VOLTAGE_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень масла ф.А 1 каскад": "",
+                    "Уровень масла ф.А 2 каскад": "",
+                    "Уровень масла ф.А 3 каскад": "",
+                    "Уровень масла ф.А 4 каскад": "",
+                    "Уровень масла ф.В 1 каскад": "",
+                    "Уровень масла ф.В 2 каскад": "",
+                    "Уровень масла ф.В 3 каскад": "",
+                    "Уровень масла ф.В 4 каскад": "",
+                    "Уровень масла ф.С 1 каскад": "",
+                    "Уровень масла ф.С 2 каскад": "",
+                    "Уровень масла ф.С 3 каскад": "",
+                    "Уровень масла ф.С 4 каскад": ""
+                },
+                "dateTime": "27.08.2025 12:04"
+            },
+            {
+                "equipment": {
+                    "id": "ТН-500 СГРЭС-1",
+                    "name": "ТН-500 СГРЭС-1",
+                    "type": "VOLTAGE_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень масла ф.А 1 каскад": "",
+                    "Уровень масла ф.А 2 каскад": "",
+                    "Уровень масла ф.А 3 каскад": "",
+                    "Уровень масла ф.А 4 каскад": "",
+                    "Уровень масла ф.В 1 каскад": "",
+                    "Уровень масла ф.В 2 каскад": "",
+                    "Уровень масла ф.В 3 каскад": "",
+                    "Уровень масла ф.В 4 каскад": "",
+                    "Уровень масла ф.С 1 каскад": "",
+                    "Уровень масла ф.С 2 каскад": "",
+                    "Уровень масла ф.С 3 каскад": "",
+                    "Уровень масла ф.С 4 каскад": ""
+                },
+                "dateTime": "27.08.2025 12:04"
+            },
+            {
+                "equipment": {
+                    "id": "air_pipes_500",
+                    "name": "Трубопроводы воздушной сети ОРУ-500",
+                    "type": "BUILDING",
+                    "parameters": [
+                        {
+                            "name": "Состояние трубопроводов",
+                            "unit": "",
+                            "normalValue": "исправно"
+                        },
+                        {
+                            "name": "Отсутствие утечек",
+                            "unit": "",
+                            "normalValue": "норма"
+                        },
+                        {
+                            "name": "Давление в системе",
+                            "unit": "кгс/см²",
+                            "normalValue": "норма"
+                        },
+                        {
+                            "name": "Примечание",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Состояние трубопроводов": "",
+                    "Отсутствие утечек": "",
+                    "Давление в системе": "",
+                    "Примечание": ""
+                },
+                "dateTime": "27.08.2025 12:04"
+            }
+        ],
+        "isCompleted": true
+    },
+    {
+        "id": "ae4cd61b-bf33-41f8-8dad-9f6cfd6ee431",
+        "dateTimeString": "27.08.2025 14:50",
+        "oru": {
+            "voltage": "500",
+            "name": "ОРУ-500",
+            "equipments": [
+                {
+                    "id": "В-500 Р-500 2С",
+                    "name": "В-500 Р-500 2С",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Уровень продувки ф.А I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.А II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        }
+                    ]
+                },
+                {
+                    "id": "В-500 ВШТ-31",
+                    "name": "В-500 ВШТ-31",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Давление элегаза ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Давление элегаза ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Давление элегаза ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "ТТ-500 ВШТ-31",
+                    "name": "ТТ-500 ВШТ-31",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "В-500 ВЛТ-30",
+                    "name": "В-500 ВЛТ-30",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Давление элегаза ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Давление элегаза ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Давление элегаза ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "ТТ-500 ВЛТ-30",
+                    "name": "ТТ-500 ВЛТ-30",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "В-500 ВШЛ-32",
+                    "name": "В-500 ВШЛ-32",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Уровень продувки ф.А I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.А II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        }
+                    ]
+                },
+                {
+                    "id": "ТТ-500 ВШЛ-32",
+                    "name": "ТТ-500 ВШЛ-32",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "В-500 ВШЛ-21",
+                    "name": "В-500 ВШЛ-21",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Уровень продувки ф.А I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.А II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        }
+                    ]
+                },
+                {
+                    "id": "ТТ-500 ВШЛ-21",
+                    "name": "ТТ-500 ВШЛ-21",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "В-500 ВШТ-22",
+                    "name": "В-500 ВШТ-22",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Уровень продувки ф.А I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.А II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        }
+                    ]
+                },
+                {
+                    "id": "ТТ-500 ВШТ-22",
+                    "name": "ТТ-500 ВШТ-22",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "В-500 ВЛТ-20",
+                    "name": "В-500 ВЛТ-20",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Уровень продувки ф.А I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.А II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        }
+                    ]
+                },
+                {
+                    "id": "ТТ-500 ВЛТ-20",
+                    "name": "ТТ-500 ВЛТ-20",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "В-500 ВШТ-11",
+                    "name": "В-500 ВШТ-11",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Уровень продувки ф.А I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.А II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        }
+                    ]
+                },
+                {
+                    "id": "ТТ-500 ВШТ-11",
+                    "name": "ТТ-500 ВШТ-11",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "В-500 ВШЛ-12",
+                    "name": "В-500 ВШЛ-12",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Уровень продувки ф.А I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.А II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        }
+                    ]
+                },
+                {
+                    "id": "ТТ-500 ВШЛ-12",
+                    "name": "ТТ-500 ВШЛ-12",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "ТТ-500 Трачуковская",
+                    "name": "ТТ-500 Трачуковская",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "1ТН-500 Трачуковская",
+                    "name": "1ТН-500 Трачуковская",
+                    "type": "VOLTAGE_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "2ТН-500 Трачуковская",
+                    "name": "2ТН-500 Трачуковская",
+                    "type": "VOLTAGE_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "ТН-500 Белозёрная",
+                    "name": "ТН-500 Белозёрная",
+                    "type": "VOLTAGE_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "1ТН-500",
+                    "name": "1ТН-500",
+                    "type": "VOLTAGE_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "2ТН-500",
+                    "name": "2ТН-500",
+                    "type": "VOLTAGE_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "ТН-500 СГРЭС-1",
+                    "name": "ТН-500 СГРЭС-1",
+                    "type": "VOLTAGE_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                {
+                    "id": "air_pipes_500",
+                    "name": "Трубопроводы воздушной сети ОРУ-500",
+                    "type": "BUILDING",
+                    "parameters": [
+                        {
+                            "name": "Состояние трубопроводов",
+                            "unit": "",
+                            "normalValue": "исправно"
+                        },
+                        {
+                            "name": "Отсутствие утечек",
+                            "unit": "",
+                            "normalValue": "норма"
+                        },
+                        {
+                            "name": "Давление в системе",
+                            "unit": "кгс/см²",
+                            "normalValue": "норма"
+                        },
+                        {
+                            "name": "Примечание",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        "results": [
+            {
+                "equipment": {
+                    "id": "В-500 Р-500 2С",
+                    "name": "В-500 Р-500 2С",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Уровень продувки ф.А I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.А II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень продувки ф.А I эл.": "1",
+                    "Уровень продувки ф.А II эл.": "1",
+                    "Уровень продувки ф.В I эл.": "1",
+                    "Уровень продувки ф.В II эл.": "1",
+                    "Уровень продувки ф.С I эл.": "1",
+                    "Уровень продувки ф.С II эл.": "1"
+                },
+                "dateTime": "27.08.2025 14:50"
+            },
+            {
+                "equipment": {
+                    "id": "В-500 ВШТ-31",
+                    "name": "В-500 ВШТ-31",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Давление элегаза ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Давление элегаза ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Давление элегаза ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Давление элегаза ф.А": "1",
+                    "Давление элегаза ф.В": "",
+                    "Давление элегаза ф.С": ""
+                },
+                "dateTime": "27.08.2025 14:50"
+            },
+            {
+                "equipment": {
+                    "id": "ТТ-500 ВШТ-31",
+                    "name": "ТТ-500 ВШТ-31",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень масла ф.А": "",
+                    "Уровень масла ф.В": "",
+                    "Уровень масла ф.С": ""
+                },
+                "dateTime": "27.08.2025 14:50"
+            },
+            {
+                "equipment": {
+                    "id": "В-500 ВЛТ-30",
+                    "name": "В-500 ВЛТ-30",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Давление элегаза ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Давление элегаза ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Давление элегаза ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Давление элегаза ф.А": "",
+                    "Давление элегаза ф.В": "",
+                    "Давление элегаза ф.С": ""
+                },
+                "dateTime": "27.08.2025 14:50"
+            },
+            {
+                "equipment": {
+                    "id": "ТТ-500 ВЛТ-30",
+                    "name": "ТТ-500 ВЛТ-30",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень масла ф.А": "",
+                    "Уровень масла ф.В": "",
+                    "Уровень масла ф.С": ""
+                },
+                "dateTime": "27.08.2025 14:50"
+            },
+            {
+                "equipment": {
+                    "id": "В-500 ВШЛ-32",
+                    "name": "В-500 ВШЛ-32",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Уровень продувки ф.А I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.А II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень продувки ф.А I эл.": "",
+                    "Уровень продувки ф.А II эл.": "",
+                    "Уровень продувки ф.В I эл.": "",
+                    "Уровень продувки ф.В II эл.": "",
+                    "Уровень продувки ф.С I эл.": "",
+                    "Уровень продувки ф.С II эл.": ""
+                },
+                "dateTime": "27.08.2025 14:50"
+            },
+            {
+                "equipment": {
+                    "id": "ТТ-500 ВШЛ-32",
+                    "name": "ТТ-500 ВШЛ-32",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень масла ф.А": "",
+                    "Уровень масла ф.В": "",
+                    "Уровень масла ф.С": ""
+                },
+                "dateTime": "27.08.2025 14:50"
+            },
+            {
+                "equipment": {
+                    "id": "В-500 ВШЛ-21",
+                    "name": "В-500 ВШЛ-21",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Уровень продувки ф.А I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.А II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень продувки ф.А I эл.": "",
+                    "Уровень продувки ф.А II эл.": "",
+                    "Уровень продувки ф.В I эл.": "",
+                    "Уровень продувки ф.В II эл.": "",
+                    "Уровень продувки ф.С I эл.": "",
+                    "Уровень продувки ф.С II эл.": ""
+                },
+                "dateTime": "27.08.2025 14:50"
+            },
+            {
+                "equipment": {
+                    "id": "ТТ-500 ВШЛ-21",
+                    "name": "ТТ-500 ВШЛ-21",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень масла ф.А": "",
+                    "Уровень масла ф.В": "",
+                    "Уровень масла ф.С": ""
+                },
+                "dateTime": "27.08.2025 14:50"
+            },
+            {
+                "equipment": {
+                    "id": "В-500 ВШТ-22",
+                    "name": "В-500 ВШТ-22",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Уровень продувки ф.А I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.А II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень продувки ф.А I эл.": "",
+                    "Уровень продувки ф.А II эл.": "",
+                    "Уровень продувки ф.В I эл.": "",
+                    "Уровень продувки ф.В II эл.": "",
+                    "Уровень продувки ф.С I эл.": "",
+                    "Уровень продувки ф.С II эл.": ""
+                },
+                "dateTime": "27.08.2025 14:50"
+            },
+            {
+                "equipment": {
+                    "id": "ТТ-500 ВШТ-22",
+                    "name": "ТТ-500 ВШТ-22",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень масла ф.А": "",
+                    "Уровень масла ф.В": "",
+                    "Уровень масла ф.С": ""
+                },
+                "dateTime": "27.08.2025 14:50"
+            },
+            {
+                "equipment": {
+                    "id": "В-500 ВЛТ-20",
+                    "name": "В-500 ВЛТ-20",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Уровень продувки ф.А I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.А II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень продувки ф.А I эл.": "",
+                    "Уровень продувки ф.А II эл.": "",
+                    "Уровень продувки ф.В I эл.": "",
+                    "Уровень продувки ф.В II эл.": "",
+                    "Уровень продувки ф.С I эл.": "",
+                    "Уровень продувки ф.С II эл.": ""
+                },
+                "dateTime": "27.08.2025 14:50"
+            },
+            {
+                "equipment": {
+                    "id": "ТТ-500 ВЛТ-20",
+                    "name": "ТТ-500 ВЛТ-20",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень масла ф.А": "",
+                    "Уровень масла ф.В": "",
+                    "Уровень масла ф.С": ""
+                },
+                "dateTime": "27.08.2025 14:50"
+            },
+            {
+                "equipment": {
+                    "id": "В-500 ВШТ-11",
+                    "name": "В-500 ВШТ-11",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Уровень продувки ф.А I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.А II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень продувки ф.А I эл.": "",
+                    "Уровень продувки ф.А II эл.": "",
+                    "Уровень продувки ф.В I эл.": "",
+                    "Уровень продувки ф.В II эл.": "",
+                    "Уровень продувки ф.С I эл.": "",
+                    "Уровень продувки ф.С II эл.": ""
+                },
+                "dateTime": "27.08.2025 14:50"
+            },
+            {
+                "equipment": {
+                    "id": "ТТ-500 ВШТ-11",
+                    "name": "ТТ-500 ВШТ-11",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень масла ф.А": "",
+                    "Уровень масла ф.В": "",
+                    "Уровень масла ф.С": ""
+                },
+                "dateTime": "27.08.2025 14:50"
+            },
+            {
+                "equipment": {
+                    "id": "В-500 ВШЛ-12",
+                    "name": "В-500 ВШЛ-12",
+                    "type": "CIRCUIT_BREAKER",
+                    "parameters": [
+                        {
+                            "name": "Уровень продувки ф.А I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.А II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.В II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С I эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        },
+                        {
+                            "name": "Уровень продувки ф.С II эл.",
+                            "unit": "",
+                            "normalValue": "0,5 - 1"
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень продувки ф.А I эл.": "",
+                    "Уровень продувки ф.А II эл.": "",
+                    "Уровень продувки ф.В I эл.": "",
+                    "Уровень продувки ф.В II эл.": "",
+                    "Уровень продувки ф.С I эл.": "",
+                    "Уровень продувки ф.С II эл.": ""
+                },
+                "dateTime": "27.08.2025 14:50"
+            },
+            {
+                "equipment": {
+                    "id": "ТТ-500 ВШЛ-12",
+                    "name": "ТТ-500 ВШЛ-12",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень масла ф.А": "",
+                    "Уровень масла ф.В": "",
+                    "Уровень масла ф.С": ""
+                },
+                "dateTime": "27.08.2025 14:50"
+            },
+            {
+                "equipment": {
+                    "id": "ТТ-500 Трачуковская",
+                    "name": "ТТ-500 Трачуковская",
+                    "type": "CURRENT_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень масла ф.А": "",
+                    "Уровень масла ф.В": "",
+                    "Уровень масла ф.С": ""
+                },
+                "dateTime": "27.08.2025 14:50"
+            },
+            {
+                "equipment": {
+                    "id": "1ТН-500 Трачуковская",
+                    "name": "1ТН-500 Трачуковская",
+                    "type": "VOLTAGE_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень масла ф.А": "",
+                    "Уровень масла ф.В": "",
+                    "Уровень масла ф.С": ""
+                },
+                "dateTime": "27.08.2025 14:50"
+            },
+            {
+                "equipment": {
+                    "id": "2ТН-500 Трачуковская",
+                    "name": "2ТН-500 Трачуковская",
+                    "type": "VOLTAGE_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень масла ф.А": "",
+                    "Уровень масла ф.В": "",
+                    "Уровень масла ф.С": ""
+                },
+                "dateTime": "27.08.2025 14:50"
+            },
+            {
+                "equipment": {
+                    "id": "ТН-500 Белозёрная",
+                    "name": "ТН-500 Белозёрная",
+                    "type": "VOLTAGE_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень масла ф.А": "",
+                    "Уровень масла ф.В": "",
+                    "Уровень масла ф.С": ""
+                },
+                "dateTime": "27.08.2025 14:50"
+            },
+            {
+                "equipment": {
+                    "id": "1ТН-500",
+                    "name": "1ТН-500",
+                    "type": "VOLTAGE_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень масла ф.А 1 каскад": "",
+                    "Уровень масла ф.А 2 каскад": "",
+                    "Уровень масла ф.А 3 каскад": "",
+                    "Уровень масла ф.А 4 каскад": "",
+                    "Уровень масла ф.В 1 каскад": "",
+                    "Уровень масла ф.В 2 каскад": "",
+                    "Уровень масла ф.В 3 каскад": "",
+                    "Уровень масла ф.В 4 каскад": "",
+                    "Уровень масла ф.С 1 каскад": "",
+                    "Уровень масла ф.С 2 каскад": "",
+                    "Уровень масла ф.С 3 каскад": "",
+                    "Уровень масла ф.С 4 каскад": ""
+                },
+                "dateTime": "27.08.2025 14:50"
+            },
+            {
+                "equipment": {
+                    "id": "2ТН-500",
+                    "name": "2ТН-500",
+                    "type": "VOLTAGE_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень масла ф.А 1 каскад": "",
+                    "Уровень масла ф.А 2 каскад": "",
+                    "Уровень масла ф.А 3 каскад": "",
+                    "Уровень масла ф.А 4 каскад": "",
+                    "Уровень масла ф.В 1 каскад": "",
+                    "Уровень масла ф.В 2 каскад": "",
+                    "Уровень масла ф.В 3 каскад": "",
+                    "Уровень масла ф.В 4 каскад": "",
+                    "Уровень масла ф.С 1 каскад": "",
+                    "Уровень масла ф.С 2 каскад": "",
+                    "Уровень масла ф.С 3 каскад": "",
+                    "Уровень масла ф.С 4 каскад": ""
+                },
+                "dateTime": "27.08.2025 14:50"
+            },
+            {
+                "equipment": {
+                    "id": "ТН-500 СГРЭС-1",
+                    "name": "ТН-500 СГРЭС-1",
+                    "type": "VOLTAGE_TRANSFORMER",
+                    "parameters": [
+                        {
+                            "name": "Уровень масла ф.А 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.А 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.В 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 1 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 2 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 3 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        },
+                        {
+                            "name": "Уровень масла ф.С 4 каскад",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Уровень масла ф.А 1 каскад": "",
+                    "Уровень масла ф.А 2 каскад": "",
+                    "Уровень масла ф.А 3 каскад": "",
+                    "Уровень масла ф.А 4 каскад": "",
+                    "Уровень масла ф.В 1 каскад": "",
+                    "Уровень масла ф.В 2 каскад": "",
+                    "Уровень масла ф.В 3 каскад": "",
+                    "Уровень масла ф.В 4 каскад": "",
+                    "Уровень масла ф.С 1 каскад": "",
+                    "Уровень масла ф.С 2 каскад": "",
+                    "Уровень масла ф.С 3 каскад": "",
+                    "Уровень масла ф.С 4 каскад": ""
+                },
+                "dateTime": "27.08.2025 14:50"
+            },
+            {
+                "equipment": {
+                    "id": "air_pipes_500",
+                    "name": "Трубопроводы воздушной сети ОРУ-500",
+                    "type": "BUILDING",
+                    "parameters": [
+                        {
+                            "name": "Состояние трубопроводов",
+                            "unit": "",
+                            "normalValue": "исправно"
+                        },
+                        {
+                            "name": "Отсутствие утечек",
+                            "unit": "",
+                            "normalValue": "норма"
+                        },
+                        {
+                            "name": "Давление в системе",
+                            "unit": "кгс/см²",
+                            "normalValue": "норма"
+                        },
+                        {
+                            "name": "Примечание",
+                            "unit": "",
+                            "normalValue": ""
+                        }
+                    ]
+                },
+                "parameters": {
+                    "Состояние трубопроводов": "",
+                    "Отсутствие утечек": "",
+                    "Давление в системе": "",
+                    "Примечание": ""
+                },
+                "dateTime": "27.08.2025 14:50"
+            }
+        ],
+        "isCompleted": true
+    }
+]
